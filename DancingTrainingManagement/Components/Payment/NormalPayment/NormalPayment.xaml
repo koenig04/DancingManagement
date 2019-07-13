@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.Payment.NormalPayment.NormalPayment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.Payment.NormalPayment"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:converter="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:AccountItemViewModel}">
+            <Border BorderThickness="1" CornerRadius="2" Height="46" Width="192" Margin="2">
+                <Border.Background>
+                    <SolidColorBrush Color="{Binding ItemColor}"/>
+                </Border.Background>
+                <StackPanel Orientation="Horizontal" Height="{Binding TotalHeight}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding ItemClicked}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Image Width="40" Height="40" Source="{Binding ItemImg}" VerticalAlignment="Center"/>
+                    <Label Width="135" Content="{Binding ItemName}"
+                           Style="{StaticResource LabelStyleBaseChs}" FontSize="16" >
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{Binding ItemForeColor}"/>
+                        </Label.Foreground>
+                    </Label>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <converter:IsCheckedConverter x:Key="isCheckedConverter"/>
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="280"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Height="30" Width="150" Orientation="Horizontal">
+            <ToggleButton Width="75" Style="{StaticResource IncomeToggleButton}" 
+                          IsChecked="{Binding InOutState,Converter={StaticResource isCheckedConverter},ConverterParameter=0}" 
+                          Command="{Binding ChangeInOutState}" CommandParameter="0"/>
+            <ToggleButton Width="75" Style="{StaticResource OutcomeToggleButton}" 
+                          IsChecked="{Binding InOutState,Converter={StaticResource isCheckedConverter},ConverterParameter=1}" 
+                          Command="{Binding ChangeInOutState}" CommandParameter="1"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="30 0 0 0">
+            <Label Style="{StaticResource ItemConfigLabel}" Content="类别"/>
+            <Border Width="980" Height="200" BorderBrush="{StaticResource ResourceKey=mainColor}" BorderThickness="1" CornerRadius="2" >
+                <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="980" Height="200" ItemWidth="980">
+                    <ItemsControl ItemsSource="{Binding ItemCollection}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </WrapPanel>
+            </Border>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                <Label Content="日期" Style="{StaticResource ItemConfigLabel}" Margin="25 0 0 0"/>
+                <DatePicker SelectedDate="{Binding AccountDate}" Margin="20,0,0,0" Width="300" VerticalAlignment="Center" Height="30" FontSize="15" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                <Label Content="金额" Style="{StaticResource ItemConfigLabel}" Margin="25 0 0 0"/>
+                <TextBox Style="{StaticResource TextBoxStyleBaseChs}" Text="{Binding AccountAmount}" Width="300" Margin="20,0,0,0" 
+                         FontSize="15" Height="30"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Label Content="备注" Style="{StaticResource ItemConfigLabel}" Margin="25 0 0 0"/>
+                <TextBox Style="{StaticResource TextBoxStyleBaseChs}" Text="{Binding Notice}" Width="300" Margin="20,0,0,0" FontSize="15" Height="30"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="150" Content="确定" Command="{Binding Confirm}"/>
+            <Button Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="150" Content="清空" Margin="20 0 20 0" Command="{Binding ClearAll}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

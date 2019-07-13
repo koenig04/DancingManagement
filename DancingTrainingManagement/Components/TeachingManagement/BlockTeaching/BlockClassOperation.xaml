@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.TeachingManagement.BlockTeaching.BlockClassOperation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.BlockTeaching"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <local:BlockClassSeasonConverter x:Key="ClassSeasonConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" Width="1040" Height="700" Opacity="0.8"
+               Background="{StaticResource ResourceKey=mainBackground}"/>
+        <Border Grid.Column="1" Grid.Row="1" Height="440" Width="540" BorderBrush="White" CornerRadius="10" BorderThickness="2" Background="{StaticResource assistBackground}">
+            <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource assistBackground}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" CornerRadius="10 10 0 00" Height="50" Width="538" Background="{StaticResource mainColor}">
+                    <Label Content="{Binding Title}" Style="{StaticResource SysConfigureLabelStyle}" Margin="60 0 0 0"
+                       HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
+                </Border>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Margin="50 0 0 0" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="年份" FontSize="15" 
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                        <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectedYear}"
+                                  ItemsSource="{Binding YearCollection}" Width="100" Margin="5 0 0 0"/>
+                        <Label Width="140" Height="30" Style="{StaticResource SysConfigureLabelStyle}" FontSize="10" FontWeight="Normal" 
+                         Foreground="{StaticResource outcomeColor}" Content="请选择年份" Visibility="{Binding ErrYearVis}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <Label Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="任课老师" FontSize="15" 
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                        <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectedTeacher}"
+                                  ItemsSource="{Binding TeacherCollection}" Width="100" Margin="5 0 0 0"/>
+                        <Label Width="140" Height="30" Style="{StaticResource SysConfigureLabelStyle}" FontSize="10" FontWeight="Normal" 
+                         Foreground="{StaticResource outcomeColor}" Content="请选择任课老师" Visibility="{Binding ErrTeacherVis}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <Label Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="等级" FontSize="15" 
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                        <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectedClassType}"
+                                  ItemsSource="{Binding ClassTypeCollection}" Width="100" Margin="5 0 0 0"/>
+                        <Label Width="140" Height="30" Style="{StaticResource SysConfigureLabelStyle}" FontSize="10" FontWeight="Normal" 
+                         Foreground="{StaticResource outcomeColor}" Content="请选择课程等级" Visibility="{Binding ErrClassTypeVis}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <Label Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="上课时间" FontSize="15" 
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                        <RadioButton GroupName="BlockClassSeasonGroup"  IsChecked="{Binding ClassSeason, Converter={StaticResource ClassSeasonConverter}, ConverterParameter=0}" 
+                                     Style="{StaticResource RadioButtonStyleBaseChs}" FontSize="15" Content="春季" Visibility="Collapsed"/>
+                        <RadioButton GroupName="BlockClassSeasonGroup" IsChecked="{Binding ClassSeason, Converter={StaticResource ClassSeasonConverter}, ConverterParameter=1}" 
+                                     Style="{StaticResource RadioButtonStyleBaseChs}" FontSize="15" Content="夏季"/>
+                        <RadioButton GroupName="BlockClassSeasonGroup"  IsChecked="{Binding ClassSeason, Converter={StaticResource ClassSeasonConverter}, ConverterParameter=2}" 
+                                     Style="{StaticResource RadioButtonStyleBaseChs}" FontSize="15" Content="秋季" Visibility="Collapsed"/>
+                        <RadioButton GroupName="BlockClassSeasonGroup" IsChecked="{Binding ClassSeason, Converter={StaticResource ClassSeasonConverter}, ConverterParameter=3}" 
+                                     Style="{StaticResource RadioButtonStyleBaseChs}" FontSize="15" Content="冬季"/>
+                        <Label Width="140" Height="30" Style="{StaticResource SysConfigureLabelStyle}" FontSize="10" FontWeight="Normal" 
+                         Foreground="{StaticResource outcomeColor}" Content="请选择上课时间" Visibility="{Binding ErrSeasonVis}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                        <Label Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="学费（期）" FontSize="15" 
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                        <TextBox Width="120" FontSize="15" FontFamily="Microsoft YaHei" Text="{Binding CostPerTerm}" Height="30" Margin="5 0 0 0" 
+                         Background="{StaticResource ResourceKey=mainBackground}" VerticalContentAlignment="Center" Foreground="{StaticResource mainColor}"/>
+                        <Label Width="140" Height="30" Style="{StaticResource SysConfigureLabelStyle}" FontSize="10" FontWeight="Normal" 
+                         Foreground="{StaticResource outcomeColor}" Content="请输入正确的学费" Visibility="{Binding ErrVis}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+                    <Button Grid.Column="0" Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="120"
+                            Content="确定" Command="{Binding Confirm}"/>
+                    <Button Grid.Column="1" Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="120" Margin="30 0 30 0"
+                            Content="取消" Command="{Binding Cancel}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

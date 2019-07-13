@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E4DCDC9D-408D-4BAC-A088-1EC123B0A892}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClassManagement\BlockClassManagement.cs" />
+    <Compile Include="ClassManagement\RegularClassManagement.cs" />
+    <Compile Include="CommonBussiness\ClassSelecterBussiness.cs" />
+    <Compile Include="ItemManagement\ItemManagementBussiness.cs" />
+    <Compile Include="Login\LoginBussiness.cs" />
+    <Compile Include="MainWindowBussiness.cs" />
+    <Compile Include="NameCallingManagement\EditNameCallingBussiness.cs" />
+    <Compile Include="NameCallingManagement\NameCallingBussiness.cs" />
+    <Compile Include="NameCallingManagement\NameCallingMangementBussiness.cs" />
+    <Compile Include="OverdueManagement\OverdueManagementBussiness.cs" />
+    <Compile Include="PaymentManagement\ClassPayment\ClassFeeBussiness.cs" />
+    <Compile Include="PaymentManagement\ClassPayment\ClassPaymentBussiness.cs" />
+    <Compile Include="PaymentManagement\ClassPayment\PaymentSelecter\PaymentInCountBussiness.cs" />
+    <Compile Include="PaymentManagement\ClassPayment\TeacherFeeBussiness.cs" />
+    <Compile Include="PaymentManagement\NormalPayment\NormalPaymentBussiness.cs" />
+    <Compile Include="PaymentManagement\PaymentManagementBussiness.cs" />
+    <Compile Include="PDFExporter\PDFExporterBase.cs" />
+    <Compile Include="PDFExporter\PDFExporterCallingList.cs" />
+    <Compile Include="PDFExporter\PDFExporterOverdue.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticManagement\FinanceStatistic\FinanceStatisticBussiness.cs" />
+    <Compile Include="StatisticManagement\FinanceStatistic\FinanceStatisticGroup.cs" />
+    <Compile Include="StatisticManagement\GeneralAndExport\GeneralAndExportBussiness.cs" />
+    <Compile Include="StatisticManagement\StatisticManagementBussiness.cs" />
+    <Compile Include="StatisticManagement\TeachingStatistic\TeachingCountGroup.cs" />
+    <Compile Include="StatisticManagement\TeachingStatistic\TeachingStatisticBussiness.cs" />
+    <Compile Include="StatisticManagement\TraineeStatistic\PresenceBussiness.cs" />
+    <Compile Include="StatisticManagement\TraineeStatistic\TraineeStatisticBussiness.cs" />
+    <Compile Include="TeacherManagement\TeacherManagementBussiness.cs" />
+    <Compile Include="TeachingManagement\BlockTeaching\BlockClassOperationBussiness.cs" />
+    <Compile Include="TeachingManagement\BlockTeaching\BlockTeachingBussiness.cs" />
+    <Compile Include="TeachingManagement\BlockTeaching\BlockTraineeBussiness.cs" />
+    <Compile Include="TeachingManagement\Others\OthersBussiness.cs" />
+    <Compile Include="TeachingManagement\RegularTeaching\RegularClassOperationBussiness.cs" />
+    <Compile Include="TeachingManagement\RegularTeaching\RegularTeachingBussiness.cs" />
+    <Compile Include="TeachingManagement\RegularTeaching\RegularTraineeBussiness.cs" />
+    <Compile Include="TeachingManagement\TraineeOperationBussiness.cs" />
+    <Compile Include="TeachingManagement\TeachingManagementBussiness.cs" />
+    <Compile Include="TraineeManagement\TraineeManagementBussiness.cs" />
+    <Compile Include="UserSettingManagement\ChangPasswordBussiness.cs" />
+    <Compile Include="UserSettingManagement\UserSettingManagementBussiness.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{2fa287de-33b6-4005-88c5-6f7d299ad89c}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{8b82f5fb-fafd-414e-b242-785d0db01f05}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{5df4bd07-ec54-413f-84ca-121edcb58e25}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.Payment.Payment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.Payment"
+             xmlns:convert="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Converter"
+             xmlns:classPayment="clr-namespace:DancingTrainingManagement.Components.Payment.ClassPayment"
+             xmlns:normalPayment="clr-namespace:DancingTrainingManagement.Components.Payment.NormalPayment"
+             xmlns:msg="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Message"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <convert:IsCheckedConverter x:Key="ischeckedConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Height="100" Width="1040" Background="{StaticResource ResourceKey=mainColor}"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30 0 0 0">
+            <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding PaymentFunc,
+                          Converter={StaticResource ischeckedConverter},ConverterParameter=0}" Command="{Binding ChangePayment}" CommandParameter="0" 
+                          Content="课费收支" VerticalAlignment="Bottom"/>
+            <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding PaymentFunc,
+                          Converter={StaticResource ischeckedConverter},ConverterParameter=1}" Command="{Binding ChangePayment}" CommandParameter="1"
+                          Content="一般收支" VerticalAlignment="Bottom"/>
+        </StackPanel>
+        <classPayment:ClassPayment Grid.Row="1" DataContext="{Binding ClassPayment}"/>
+        <normalPayment:NormalPayment Grid.Row="1" DataContext="{Binding NormalPayment}"/>
+        <msg:Message Grid.Row="1" DataContext="{Binding Msg}"/>
+    </Grid>
+</UserControl>

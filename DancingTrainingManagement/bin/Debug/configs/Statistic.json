@@ -1,0 +1,104 @@
+[
+  {
+    "StatisticType": 0,
+    "Catogery": 0,
+    "ShownText": "所有收入"
+  },
+  {
+    "StatisticType": 1,
+    "Catogery": 1,
+    "ShownText": "所有支出"
+  },
+  {
+    "StatisticType": 2,
+    "Catogery": 2,
+    "ShownText": "结余"
+  },
+  {
+    "StatisticType": 17,
+    "Catogery": 2,
+    "ShownText": "资产"
+  },
+  {
+    "StatisticType": 3,
+    "Catogery": 0,
+    "ShownText": "学费"
+  },
+  {
+    "StatisticType": 4,
+    "Catogery": 1,
+    "ShownText": "课时费"
+  },
+  {
+    "StatisticType": 5,
+    "Catogery": 1,
+    "ShownText": "分红",
+    "ID": "IT6"
+  },
+  {
+    "StatisticType": 6,
+    "Catogery": 1,
+    "ShownText": "工资",
+    "ID": "IT7"
+  },
+  {
+    "StatisticType": 7,
+    "Catogery": 0,
+    "ShownText": "其余收入",
+    "ID": "IT4"
+  },  
+  {
+    "StatisticType": 8,
+    "Catogery": 1,
+    "ShownText": "其余支出",
+    "ID": "IT5"
+  },
+  {
+    "StatisticType": 9,
+    "Catogery": 1,
+    "ShownText": "水费",
+    "ID": "IT2"
+  },
+  {
+    "StatisticType": 10,
+    "Catogery": 1,
+    "ShownText": "电费",
+    "ID": "IT1"
+  },
+  {
+    "StatisticType": 11,
+    "Catogery": 0,
+    "ShownText": "考级",
+    "ID": "IT3"
+  },
+  {
+    "StatisticType": 12,
+    "Catogery": 0,
+    "ShownText": "舞蹈用品售卖",
+    "ID": "IT8"
+  },
+  {
+    "StatisticType": 13,
+    "Catogery": 1,
+    "ShownText": "舞蹈用品成本",
+    "ID": "IT9"
+  },
+  {
+    "StatisticType": 14,
+    "Catogery": 1,
+    "ShownText": "房租",
+    "ID": "IT10"
+  },
+  {
+    "StatisticType": 15,
+    "Catogery": 0,
+    "ShownText": "注资",
+    "ID": "IT11"
+  },
+  {
+    "StatisticType": 16,
+    "Catogery": 1,
+    "ShownText": "提现手续费",
+    "ID": "IT12"
+  }
+]

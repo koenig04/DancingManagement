@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.CommonComponent.Message.Message"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Message"
+             mc:Ignorable="d" 
+             d:DesignHeight="{Binding MsgTotalHeight}" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <local:MessageLevelConverter x:Key="levelConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" Width="1040" Height="800" Opacity="0.8"
+               Background="{StaticResource ResourceKey=mainBackground}"/>
+        <Border Grid.Column="1" Grid.Row="1" Height="360" Width="540" BorderBrush="White" CornerRadius="10" BorderThickness="2" Background="{StaticResource assistBackground}">
+            <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource assistBackground}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" CornerRadius="10 10 0 00" Height="50" Width="538" Background="{StaticResource mainColor}"/>
+                <Label Grid.Row="1" Width="500" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding MsgContent}" FontSize="20" 
+                                HorizontalContentAlignment="Center" HorizontalAlignment="Center">
+                    <Label.Foreground>
+                        <SolidColorBrush Color="{Binding MsgLevel,Converter={StaticResource levelConverter}}"/>
+                    </Label.Foreground>
+                </Label>
+                <Button Grid.Row="2" Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="120" HorizontalAlignment="Right"
+                            Content="确定" Command="{Binding Confirm}" Margin="0 0 30 0"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

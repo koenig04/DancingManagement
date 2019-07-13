@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12ABC2DF-90D8-4367-A8CD-7EC68B90C980}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DancingTrainingManagement</RootNamespace>
+    <AssemblyName>DancingTrainingManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net40\LiveCharts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net40\LiveCharts.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Components\CommonComponent\ClassSelecter\ClassSelecter.xaml.cs">
+      <DependentUpon>ClassSelecter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\ClassSelecter\ClassSelecterViewModel.cs" />
+    <Compile Include="Components\CommonComponent\Converter\IsCheckedConverter.cs" />
+    <Compile Include="Components\CommonComponent\Converter\MainBackgroundColorConverter.cs" />
+    <Compile Include="Components\CommonComponent\Converter\PresenceColorConverter.cs" />
+    <Compile Include="Components\CommonComponent\Converter\VisibilityConverter.cs" />
+    <Compile Include="Components\CommonComponent\Message\Message.xaml.cs">
+      <DependentUpon>Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\Message\MessageLevelConverter.cs" />
+    <Compile Include="Components\CommonComponent\Message\MessageViewModel.cs" />
+    <Compile Include="Components\CommonComponent\Message\OperationMessage.xaml.cs">
+      <DependentUpon>OperationMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\Message\OperationMessageViewModel.cs" />
+    <Compile Include="Components\NameCallingManagement\EditNameCalling\EditNameCalling.xaml.cs">
+      <DependentUpon>EditNameCalling.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\NameCallingManagement\EditNameCalling\EditNameCallingViewModel.cs" />
+    <Compile Include="Components\NameCallingManagement\NameCalling\NameCalling.xaml.cs">
+      <DependentUpon>NameCalling.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\NameCallingManagement\CommonComponent\NameCallingList.xaml.cs">
+      <DependentUpon>NameCallingList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\NameCallingManagement\CommonComponent\NameCallingListViewModel.cs" />
+    <Compile Include="Components\NameCallingManagement\NameCalling\NameCallingViewModel.cs" />
+    <Compile Include="Components\NameCallingManagement\ValueConverters\StateConverter\AbsenceStateConverter.cs" />
+    <Compile Include="Components\NameCallingManagement\ValueConverters\ClassTypeAndCountConverter.cs" />
+    <Compile Include="Components\NameCallingManagement\ValueConverters\StateConverter\GivingStateConverter.cs" />
+    <Compile Include="Components\NameCallingManagement\ValueConverters\StateConverter\LeaveStateConverter.cs" />
+    <Compile Include="Components\NameCallingManagement\ValueConverters\StateConverter\PresenceStateConverter.cs" />
+    <Compile Include="Components\NameCallingManagement\ValueConverters\StateConverter\StateConverterBase.cs" />
+    <Compile Include="Components\NameCallingManagement\CommonComponent\TraineeForCallingViewModel.cs" />
+    <Compile Include="Components\NameCallingManagement\NameCallingManagement.xaml.cs">
+      <DependentUpon>NameCallingManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\NameCallingManagement\NameCallingManagementViewModel.cs" />
+    <Compile Include="Components\Overdue\Overdue.xaml.cs">
+      <DependentUpon>Overdue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Overdue\OverdueItemViewModel.cs" />
+    <Compile Include="Components\Overdue\OverdueViewModel.cs" />
+    <Compile Include="Components\Payment\ClassPayment\ClassFee\ClassFee.xaml.cs">
+      <DependentUpon>ClassFee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Payment\ClassPayment\ClassFee\ClassFeeViewModel.cs" />
+    <Compile Include="Components\Payment\ClassPayment\ClassPayment.xaml.cs">
+      <DependentUpon>ClassPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Payment\ClassPayment\ClassPaymentViewModel.cs" />
+    <Compile Include="Components\Payment\ClassPayment\ClassFee\PaymentSelecter\PaymentInCount.xaml.cs">
+      <DependentUpon>PaymentInCount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Payment\ClassPayment\ClassFee\PaymentSelecter\PaymentInCountViewModel.cs" />
+    <Compile Include="Components\Payment\ClassPayment\TeacherFee\TeacherFee.xaml.cs">
+      <DependentUpon>TeacherFee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Payment\ClassPayment\TeacherFee\TeacherFeeViewModel.cs" />
+    <Compile Include="Components\Payment\NormalPayment\AccountItemViewModel.cs" />
+    <Compile Include="Components\Payment\NormalPayment\NormalPayment.xaml.cs">
+      <DependentUpon>NormalPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Payment\NormalPayment\NormalPaymentViewModel.cs" />
+    <Compile Include="Components\Payment\Payment.xaml.cs">
+      <DependentUpon>Payment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Payment\PaymentViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\ColorConverter.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\DateSelecter.xaml.cs">
+      <DependentUpon>DateSelecter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\DateSelecterViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\FilterItemViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\FinanceFilterItemViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\FinanceItems.xaml.cs">
+      <DependentUpon>FinanceItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\FinanceItemsViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\TeacherFilterItemViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\TeachingItems.xaml.cs">
+      <DependentUpon>TeachingItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\TeachingItemsViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\StatisticHeader.xaml.cs">
+      <DependentUpon>StatisticHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\StatisticHeaderViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\YMDSwitcher.xaml.cs">
+      <DependentUpon>YMDSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\StatisticHead\YMDSwitcherViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Details\DetailViewModelBase.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Details\TeachingCountDetailsViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Details\TeachingCountViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\FinanceSummaryViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\ItemGroup\FinanceSummaryGroupViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\ItemGroup\TeachingClassCountGroupViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Item\FinanceSummaryItemViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Item\TeachingClassCountItemViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Summary.xaml.cs">
+      <DependentUpon>Summary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\Summary\ItemGroup\SummaryItemGroupViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Item\SummaryItemViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\TeacherSummaryViewModel.cs" />
+    <Compile Include="Components\Statistic\ConcreteStatisticViewModelBase.cs" />
+    <Compile Include="Components\Statistic\Finance\Finance.xaml.cs">
+      <DependentUpon>Finance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Details\FinanceRecordDetailsViewModel.cs" />
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Details\StatisticDetails.xaml.cs">
+      <DependentUpon>StatisticDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\CommonComponent\Summary\Details\FinanceRecordViewModel.cs" />
+    <Compile Include="Components\Statistic\Finance\FinanceViewModel.cs" />
+    <Compile Include="Components\Statistic\General\General.xaml.cs">
+      <DependentUpon>General.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\General\GeneralViewModel.cs" />
+    <Compile Include="Components\Statistic\Statistic.xaml.cs">
+      <DependentUpon>Statistic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\StatisticViewModel.cs" />
+    <Compile Include="Components\Statistic\Teacher\Teacher.xaml.cs">
+      <DependentUpon>Teacher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Teacher\TeacherViewModel.cs" />
+    <Compile Include="Components\Statistic\Trainee\PresenceItemViewModel.cs" />
+    <Compile Include="Components\Statistic\Trainee\PresenceStatistic.xaml.cs">
+      <DependentUpon>PresenceStatistic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Trainee\PresenceStatisticViewModel.cs" />
+    <Compile Include="Components\Statistic\Trainee\PresenceSum.xaml.cs">
+      <DependentUpon>PresenceSum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Trainee\PresenceSumViewModel.cs" />
+    <Compile Include="Components\Statistic\Trainee\PresenceTextConverter.cs" />
+    <Compile Include="Components\Statistic\Trainee\Trainee.xaml.cs">
+      <DependentUpon>Trainee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Trainee\TraineeViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\BlockTeaching\BlockClassOperation.xaml.cs">
+      <DependentUpon>BlockClassOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\BlockTeaching\BlockClassOperationViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\BlockTeaching\BlockClassSeasonConverter.cs" />
+    <Compile Include="Components\TeachingManagement\BlockTeaching\BlockTeaching.xaml.cs">
+      <DependentUpon>BlockTeaching.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\BlockTeaching\BlockTeachingViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\ClassList\BlockClassListViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\ClassList\ClassList.xaml.cs">
+      <DependentUpon>ClassList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\Common\ClassList\ClassListViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\ClassList\ClassViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\ClassList\RegularClassListViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\ClassOperationViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeList\BlockTraineeListViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeList\RegularTraineeListViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeList\TraineeList.xaml.cs">
+      <DependentUpon>TraineeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\Common\TraineeList\TraineeListViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeList\TraineeViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeOperation\BlockTraineeOperationViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeOperation\FuzzyTraineeViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeOperation\RegularTraineeOperationViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Common\TraineeOperation\TraineeOperation.xaml.cs">
+      <DependentUpon>TraineeOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\Common\TraineeOperation\TraineeOperationViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\Others\Others.xaml.cs">
+      <DependentUpon>Others.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\Others\OthersViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\RegularTeaching\RegularClassOperation.xaml.cs">
+      <DependentUpon>RegularClassOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\RegularTeaching\RegularClassOperationViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\RegularTeaching\RegularTeaching.xaml.cs">
+      <DependentUpon>RegularTeaching.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\RegularTeaching\RegularTeachingViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\TeacherManagement\TeacherList.xaml.cs">
+      <DependentUpon>TeacherList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\TeacherManagement\TeacherListViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\TeacherManagement\TeacherManagement.xaml.cs">
+      <DependentUpon>TeacherManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\TeacherManagement\TeacherManagementViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\TeacherManagement\TeacherViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\TeachingManagement.xaml.cs">
+      <DependentUpon>TeachingManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\TeachingManagementViewModel.cs" />
+    <Compile Include="Components\UserSetting\ChangingPassword.xaml.cs">
+      <DependentUpon>ChangingPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserSetting\ChangingPasswordViewModel.cs" />
+    <Compile Include="Components\UserSetting\UserSetting.xaml.cs">
+      <DependentUpon>UserSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\UserSetting\UserSettingViewModel.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="PasswordBoxHelper.cs" />
+    <Compile Include="UICore\DelegateCommand.cs" />
+    <Compile Include="UICore\NotificationObject.cs" />
+    <Compile Include="UICore\ViewModelBase.cs" />
+    <Page Include="Components\CommonComponent\ClassSelecter\ClassSelecter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CommonComponent\Message\Message.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CommonComponent\Message\OperationMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\NameCallingManagement\EditNameCalling\EditNameCalling.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\NameCallingManagement\NameCalling\NameCalling.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\NameCallingManagement\CommonComponent\NameCallingList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\NameCallingManagement\NameCallingManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Overdue\Overdue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Payment\ClassPayment\ClassFee\ClassFee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Payment\ClassPayment\ClassPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Payment\ClassPayment\ClassFee\PaymentSelecter\PaymentInCount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Payment\ClassPayment\TeacherFee\TeacherFee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Payment\NormalPayment\NormalPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Payment\Payment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\CommonComponent\StatisticHead\DateSelecter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\FinanceItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\CommonComponent\StatisticHead\FilterItems\TeachingItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\CommonComponent\StatisticHead\StatisticHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\CommonComponent\StatisticHead\YMDSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\CommonComponent\Summary\Summary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Finance\Finance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\CommonComponent\Summary\Details\StatisticDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\General\General.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Statistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Teacher\Teacher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Trainee\PresenceStatistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Trainee\PresenceSum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Trainee\Trainee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\BlockTeaching\BlockClassOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\BlockTeaching\BlockTeaching.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\Common\ClassList\ClassList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\Common\TraineeList\TraineeList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\Common\TraineeOperation\TraineeOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\Others\Others.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\RegularTeaching\RegularClassOperation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\RegularTeaching\RegularTeaching.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\TeacherManagement\TeacherList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\TeacherManagement\TeacherManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\TeachingManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserSetting\ChangingPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\UserSetting\UserSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Theme\Default.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{e4dcdc9d-408d-4bac-a088-1ec123b0a892}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{2fa287de-33b6-4005-88c5-6f7d299ad89c}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{5df4bd07-ec54-413f-84ca-121edcb58e25}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\delete.png" />
+    <Resource Include="icons\reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\leaveW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\editW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\deleteW.png" />
+    <Resource Include="icons\reverseW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\presenceW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\givingW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

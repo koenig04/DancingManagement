@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.TeachingManagement.TeacherManagement.TeacherList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.TeacherManagement"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:TeacherViewModel}">
+            <Label Height="50" Width="280" Style="{StaticResource LabelStyleBaseChs}" HorizontalContentAlignment="Left"  HorizontalAlignment="Center"
+                       Content="{Binding TeacherName}" Padding="10 0 0 0">
+                <Label.Background>
+                    <SolidColorBrush Color="{Binding TeacherBkg}"/>
+                </Label.Background>
+                <Label.Foreground>
+                    <SolidColorBrush Color="{Binding TeacherFore}"/>
+                </Label.Foreground>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding TeacherClicked}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Label>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Style="{StaticResource SysConfigLabel}" Content="教师列表" Foreground="{StaticResource mainColor}" FontSize="22" Margin=" 0 20 0 0"/>
+        <Grid Grid.Row="0"  Margin="220 20 20 0">
+            <Rectangle x:Name="addButtonBack" StrokeThickness="2" StrokeDashArray="2 2" Height="30" Width="30" RadiusX="2" RadiusY="2"
+                                   Stroke="{StaticResource mainColor}"/>
+            <Label x:Name="addButtonFore" Style="{StaticResource LabelStyleBaseChs}" Height="30" Width="30" Content="+" 
+                               FontWeight="ExtraBold" FontSize="20" Foreground="{StaticResource mainColor}" VerticalContentAlignment="Stretch" Padding="0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding AddTeacher}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Label>
+        </Grid>
+        <Border Grid.Row="1" BorderThickness="1" Height="500" Width="280" BorderBrush="{StaticResource ResourceKey=mainColor}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer.Content>
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding Teachers}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </ScrollViewer.Content>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

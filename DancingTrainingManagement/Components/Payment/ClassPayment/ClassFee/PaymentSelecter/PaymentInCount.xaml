@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.Payment.ClassPayment.ClassFee.PaymentSelecter.PaymentInCount"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.Payment.ClassPayment.ClassFee.PaymentSelecter"
+             xmlns:converter="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <converter:IsCheckedConverter x:Key="IsCheckedConverter"/>
+    </UserControl.Resources>
+    <Grid>        
+        <StackPanel Orientation="Horizontal" Visibility="{Binding VisRegular}">
+            <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                <ToggleButton Style="{StaticResource LeftRoundToggelButtonStyle}" IsChecked="{Binding TermCount,Converter={StaticResource IsCheckedConverter}
+                    ,ConverterParameter=1}" Command="{Binding ChangeTermCount}" CommandParameter="1" Content="一期" Width="60"/>
+                <ToggleButton Style="{StaticResource RightRoundToggelButtonStyle}" IsChecked="{Binding TermCount,Converter={StaticResource IsCheckedConverter}
+                    ,ConverterParameter=2}" Command="{Binding ChangeTermCount}" CommandParameter="2" Content="两期" Width="60"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="250 0 0 0">
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource mainColor}" 
+                   Width="100" Content="单期课费" FontSize="18" Visibility="{Binding VisRegular}"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource incomeColor}" 
+                   Width="150" Content="{Binding CostPerTerm}" FontSize="18" Visibility="{Binding VisRegular}"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource mainColor}" 
+                   Width="100" Content="缴费总额" FontSize="18" />
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource incomeColor}" 
+                   Width="150" Content="{Binding TotalCost}" FontSize="18"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

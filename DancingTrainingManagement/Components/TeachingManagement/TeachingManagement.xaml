@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.TeachingManagement.TeachingManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.TeachingManagement"
+             xmlns:regular="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.RegularTeaching"
+             xmlns:block="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.BlockTeaching"
+             xmlns:convert="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Converter"
+             xmlns:teacher="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.TeacherManagement"
+             xmlns:others="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.Others"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <convert:IsCheckedConverter x:Key="ischeckedConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Height="100" Width="1040" Background="{StaticResource ResourceKey=mainColor}"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="30 0 0 0">
+            <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding TeachingFunc,Converter={StaticResource ischeckedConverter},
+                ConverterParameter=0}" Command="{Binding ChangeTeachingFunc}" CommandParameter="0" Content="常规班管理" VerticalAlignment="Bottom"/>
+            <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding TeachingFunc,Converter={StaticResource ischeckedConverter},
+                ConverterParameter=1}" Command="{Binding ChangeTeachingFunc}" CommandParameter="1" Content="独舞班管理" VerticalAlignment="Bottom"/>
+            <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding TeachingFunc,Converter={StaticResource ischeckedConverter},
+                ConverterParameter=2}" Command="{Binding ChangeTeachingFunc}" CommandParameter="2" Content="教师管理" VerticalAlignment="Bottom"/>
+            <!--<ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding TeachingFunc,Converter={StaticResource ischeckedConverter},
+                ConverterParameter=3}" Command="{Binding ChangeTeachingFunc}" CommandParameter="3" Content="杂项" VerticalAlignment="Bottom"/>-->
+        </StackPanel>
+        <regular:RegularTeaching Grid.Row="1" DataContext="{Binding Regular}"/>
+        <block:BlockTeaching Grid.Row="1" DataContext="{Binding Block}"/>
+        <teacher:TeacherManagement Grid.Row="1" DataContext="{Binding Teacher}"/>
+        <others:Others Grid.Row="1" DataContext="{Binding Others}"/>
+    </Grid>
+</UserControl>

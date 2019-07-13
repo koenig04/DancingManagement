@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.CommonComponent.Message.OperationMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Message"
+             mc:Ignorable="d" 
+             d:DesignHeight="{Binding MsgTotalHeight}" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" Width="1040" Height="800" Opacity="0.8"
+               Background="{StaticResource ResourceKey=mainBackground}"/>
+        <Border Grid.Column="1" Grid.Row="1" Height="360" Width="540" BorderBrush="White" CornerRadius="10" BorderThickness="2" Background="{StaticResource assistBackground}">
+            <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource assistBackground}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" CornerRadius="10 10 0 00" Height="50" Width="538" Background="{StaticResource mainColor}"/>
+                <StackPanel Orientation="Vertical" Grid.Row="1" VerticalAlignment="Center">
+                    <Label Width="500" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding MsgContentOne}" FontSize="20" 
+                                HorizontalContentAlignment="Left" HorizontalAlignment="Center" Foreground="{StaticResource mainColor}"/>
+                    <Label Width="500" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding MsgContentTwo}" FontSize="20" 
+                                HorizontalContentAlignment="Left" HorizontalAlignment="Center" Foreground="{StaticResource mainColor}"/>
+                    <Label Width="500" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding MsgContentThree}" FontSize="20" 
+                                HorizontalContentAlignment="Left" HorizontalAlignment="Center" Foreground="{StaticResource mainColor}"/>
+                    <Label Width="500" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding MsgContentFour}" FontSize="20" 
+                                HorizontalContentAlignment="Left" HorizontalAlignment="Center" Foreground="{StaticResource mainColor}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Grid.Row="2" Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="120" HorizontalAlignment="Right"
+                            Content="{Binding ConfirmText}" Command="{Binding Confirm}" Margin="0 0 30 0"/>
+                    <Button Grid.Row="2" Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="120" HorizontalAlignment="Right"
+                            Content="取消" Command="{Binding Cancel}" Margin="0 0 30 0"/>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

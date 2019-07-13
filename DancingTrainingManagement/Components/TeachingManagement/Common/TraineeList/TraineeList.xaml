@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.TeachingManagement.Common.TraineeList.TraineeList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.Common.TraineeList"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="740">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:TraineeViewModel}">
+            <Border Width="230" Height="46" BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource mainColor}" Margin="2" Visibility="{Binding Vis}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="50" Height="40" Content="{Binding TraineeID}" Style="{StaticResource LabelStyleBaseChs}" >
+                            <Label.Foreground>
+                                <SolidColorBrush Color="{Binding StateColor}"/>
+                            </Label.Foreground>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding TraineeClicked}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Label>
+                        <Label Width="80" Height="40" Content="{Binding TraineeName}" Style="{StaticResource LabelStyleBaseChs}"
+                               HorizontalContentAlignment="Left" Padding="10 0 0 0">
+                            <Label.Foreground>
+                                <SolidColorBrush Color="{Binding StateColor}"/>
+                            </Label.Foreground>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding TraineeClicked}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Label>
+                        <Label Width="110" Height="40" Content="{Binding RemainClass}" Style="{StaticResource LabelStyleBaseChs}"
+                               HorizontalContentAlignment="Left" Padding="5 0 0 0" Visibility="{Binding VisRemain}">
+                            <Label.Foreground>
+                                <SolidColorBrush Color="{Binding RemainColor}"/>
+                            </Label.Foreground>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding TraineeClicked}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding VisOperation}">
+                        <Grid Visibility="{Binding ReverseVis}">
+                            <Label Width="35" Height="40" Background="{StaticResource lightMainColor}"/>
+                            <Image Source="/DancingTrainingManagement;component/icons/reverseW.png" Stretch="Fill" Width="35" Height="35">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ReverseTrainee}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </Grid>
+                        <Grid Visibility="{Binding ModifyVis}">
+                            <Label Width="35" Height="40" Background="{StaticResource lightMainColor}"/>
+                            <Image Source="/DancingTrainingManagement;Component/icons/editW.png" Stretch="Fill" Width="35" Height="35">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ModifyTrainee}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </Grid>
+                        <Grid Visibility="{Binding DeleteVis}">
+                            <Label Width="35" Height="40" Background="{StaticResource lightMainColor}"/>
+                            <Image Source="/DancingTrainingManagement;Component/icons/deleteW.png" Stretch="Fill" Width="35" Height="35">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding DeleteTrainee}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Style="{StaticResource SysConfigLabel}" Content="学员列表" Foreground="{StaticResource mainColor}" FontSize="22" Margin=" 0 20 0 0"/>
+        <Grid Grid.Row="0"  Margin="220 20 20 0">
+            <Rectangle x:Name="addButtonBack" StrokeThickness="2" StrokeDashArray="2 2" Height="30" Width="30" RadiusX="2" RadiusY="2"
+                                   Stroke="{StaticResource mainColor}"/>
+            <Label x:Name="addButtonFore" Style="{StaticResource LabelStyleBaseChs}" Height="30" Width="30" Content="+" 
+                               FontWeight="ExtraBold" FontSize="20" Foreground="{StaticResource mainColor}" VerticalContentAlignment="Stretch" Padding="0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding AddTrainee}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Label>
+        </Grid>
+        <Border Grid.Row="1" BorderThickness="1" Height="500" Width="710" BorderBrush="{StaticResource ResourceKey=mainColor}">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="710" Height="500" ItemWidth="710" >
+                <ItemsControl ItemsSource="{Binding Trainees}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </WrapPanel>
+        </Border>
+    </Grid>
+</UserControl>

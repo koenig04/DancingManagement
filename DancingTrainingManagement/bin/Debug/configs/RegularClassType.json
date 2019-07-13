@@ -1,0 +1,49 @@
+[{
+		"Level": 0,
+		"Name": "新生"
+	},
+	{
+		"Level": 1,
+		"Name": "一级"
+	},
+	{
+		"Level": 2,
+		"Name": "二级"
+	},
+	{
+		"Level": 3,
+		"Name": "三级"
+	},
+	{
+		"Level": 4,
+		"Name": "四级"
+	},
+	{
+		"Level": 5,
+		"Name": "五级"
+	},
+	{
+		"Level": 6,
+		"Name": "六级"
+	},
+	{
+		"Level": 7,
+		"Name": "七级"
+	},
+	{
+		"Level": 8,
+		"Name": "八级"
+	},
+	{
+		"Level": 9,
+		"Name": "九级"
+	},
+	{
+		"Level": 10,
+		"Name": "十级"
+	},
+	{
+		"Level": 11,
+		"Name": "提高"
+	}
+]

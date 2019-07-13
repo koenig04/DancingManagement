@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.Statistic.Trainee.Trainee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.Statistic.Trainee"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:msg="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Message"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="620"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <local:PresenceSum Grid.Row="0" DataContext="{Binding Sum}"/>
+            <lvc:PieChart Grid.Row="1" Width="550" Height="450"
+                          Hoverable="True" DataTooltip="{x:Null}" Series="{Binding PieColletcion}"/>
+        </Grid>
+        <local:PresenceStatistic Grid.Column="1" DataContext="{Binding Presence}"/>
+        <msg:Message Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Msg}"/>
+    </Grid>
+</UserControl>

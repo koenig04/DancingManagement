@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.Payment.ClassPayment.ClassPayment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.Payment.ClassPayment"
+             xmlns:classFee="clr-namespace:DancingTrainingManagement.Components.Payment.ClassPayment.ClassFee"
+             xmlns:teacherFee="clr-namespace:DancingTrainingManagement.Components.Payment.ClassPayment.TeacherFee"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="380"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <classFee:ClassFee Grid.Row="0" DataContext="{Binding ClassFee}"/>
+        <teacherFee:TeacherFee Grid.Row="1" DataContext="{Binding TeacherFee}" VerticalAlignment="Top"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.NameCallingManagement.CommonComponent.NameCallingList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.NameCallingManagement.CommonComponent"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:stateConverter="clr-namespace:DancingTrainingManagement.Components.NameCallingManagement.ValueConverters.StateConverter"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="1040">
+    <UserControl.Resources>
+        <stateConverter:PresenceStateConverter x:Key="PresenceConverter"/>
+        <stateConverter:LeaveStateConverter x:Key="LeaveConverter"/>
+        <stateConverter:AbsenceStateConverter x:Key="AbsenceConverter"/>
+        <stateConverter:GivingStateConverter x:Key="GivingConverter"/>
+        <DataTemplate DataType="{x:Type local:TraineeForCallingViewModel}">
+            <Border Width="246" Height="46" BorderThickness="1" CornerRadius="5" BorderBrush="{StaticResource mainColor}" Margin="2" Visibility="{Binding Vis}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="65" Height="40" Content="{Binding TraineeID}" Style="{StaticResource LabelStyleBaseChs}" />
+                        <Label Width="81" Height="40" Content="{Binding TraineeName}" Style="{StaticResource LabelStyleBaseChs}"
+                               HorizontalContentAlignment="Left" />
+                        <Grid>
+                            <Label Width="25" Height="46">
+                                <Label.Background>
+                                    <SolidColorBrush Color="{Binding CallingState,Converter={StaticResource PresenceConverter}}"/>
+                                </Label.Background>
+                            </Label>
+                            <Image Source="/DancingTrainingManagement;component/icons/presenceW.png" Stretch="Fill" Width="25" Height="25">
+                                <Image.ToolTip>
+                                    <Label Content="出勤"/>
+                                </Image.ToolTip>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChangeCallingState}" CommandParameter="0"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                        </Grid>
+                        <Grid>
+                            <Label Width="25" Height="46">
+                                <Label.Background>
+                                    <SolidColorBrush Color="{Binding CallingState,Converter={StaticResource LeaveConverter}}"/>
+                                </Label.Background>
+                            </Label>
+                            <Label Width="25" Height="25" Content="假" FontWeight="ExtraBold">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChangeCallingState}" CommandParameter="1"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Label>
+                            <!--<Image Source="/DancingTrainingManagement;Component/icons/leaveW.png" Stretch="Fill" Width="25" Height="25">
+                                <Image.ToolTip>
+                                    <Label Content="请假"/>
+                                </Image.ToolTip>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChangeCallingState}" CommandParameter="1"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>-->
+                        </Grid>
+                        <Grid>
+                            <Label Width="25" Height="46">
+                                <Label.Background>
+                                    <SolidColorBrush Color="{Binding CallingState,Converter={StaticResource GivingConverter}}"/>
+                                </Label.Background>
+                            </Label>
+                            <Label Width="25" Height="25" Content="送" FontWeight="ExtraBold">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChangeCallingState}" CommandParameter="3"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Label>
+                            <!--<Image Source="/DancingTrainingManagement;Component/icons/givingW.png" Stretch="Fill" Width="25" Height="25">
+                                <Image.ToolTip>
+                                    <Label Content="赠课"/>
+                                </Image.ToolTip>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChangeCallingState}" CommandParameter="3"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>-->
+                        </Grid>
+                        <Grid>
+                            <Label Width="25" Height="46">
+                                <Label.Background>
+                                    <SolidColorBrush Color="{Binding CallingState,Converter={StaticResource AbsenceConverter}}"/>
+                                </Label.Background>
+                            </Label>
+                            <Label Width="25" Height="25" Content="旷"  FontWeight="ExtraBold">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChangeCallingState}" CommandParameter="2"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Label>
+                            <!--<Image Source="/DancingTrainingManagement;Component/icons/deleteW.png" Stretch="Fill" Width="25" Height="25">
+                                <Image.ToolTip>
+                                    <Label Content="旷课"/>
+                                </Image.ToolTip>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding ChangeCallingState}" CommandParameter="2"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>-->
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Border BorderThickness="1" Height="350" Width="1000" BorderBrush="{StaticResource ResourceKey=mainColor}">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1000" Height="400" ItemWidth="1000" >
+                <ItemsControl ItemsSource="{Binding Trainees}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </WrapPanel>
+        </Border>
+    </Grid>
+</UserControl>

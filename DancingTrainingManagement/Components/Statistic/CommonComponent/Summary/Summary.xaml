@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.Statistic.CommonComponent.Summary.Summary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.Statistic.CommonComponent.Summary"
+             xmlns:group="clr-namespace:DancingTrainingManagement.Components.Statistic.CommonComponent.Summary.ItemGroup"
+             xmlns:item="clr-namespace:DancingTrainingManagement.Components.Statistic.CommonComponent.Summary.Item"             
+             xmlns:detail="clr-namespace:DancingTrainingManagement.Components.Statistic.CommonComponent.Summary.Details"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="360">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type item:FinanceSummaryItemViewModel}">
+            <UserControl Template="{StaticResource SummaryItem}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type group:FinanceSummaryGroupViewModel}">
+            <UserControl Template="{StaticResource SummaryItemGroup}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type item:TeachingClassCountItemViewModel}">
+            <UserControl Template="{StaticResource SummaryItem}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type group:TeachingClassCountGroupViewModel}">
+            <UserControl Template="{StaticResource SummaryItemGroup}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Height="500" Width="340" >
+            <StackPanel Orientation="Vertical" x:Name="Summaries">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Width="340" Height="407">
+                    <ScrollViewer.Content>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <ItemsControl ItemsSource="{Binding SummaryGroupCollection}"/>
+                        </StackPanel>
+                    </ScrollViewer.Content>
+                </ScrollViewer>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" Width="340" Height="93">
+                    <ScrollViewer.Content>
+                        <UserControl Template="{StaticResource SummaryItemGroup}" DataContext="{Binding TotalSummary}" HorizontalAlignment="Left"/>
+                    </ScrollViewer.Content>
+                </ScrollViewer>
+            </StackPanel>
+            <Popup Width="{Binding PopWidth}" Height="500" IsOpen="{Binding IsDetailListEnable}" StaysOpen="False" PlacementTarget="{Binding ElementName=Summaries}" Placement="Left"
+               AllowsTransparency="True" PopupAnimation="Fade">
+                <Grid>
+                    <detail:StatisticDetails DataContext="{Binding StatisticDetails}"/>
+                </Grid>
+            </Popup>
+        </Grid>
+    </Grid>
+</UserControl>

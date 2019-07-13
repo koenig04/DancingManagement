@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.Payment.ClassPayment.TeacherFee.TeacherFee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.Payment.ClassPayment.TeacherFee"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="1040">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.RowSpan="4" BorderBrush="{StaticResource mainColor}" BorderThickness="2"  Height="200" Width="1000">
+            <GroupBox.Header>
+                <Label Content="课时费结算" Style="{StaticResource SysConfigLabel}" Foreground="{StaticResource mainColor}" Width="110"/>
+            </GroupBox.Header>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="30 0 0 0" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal">
+                <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource mainColor}" FontSize="15" Width="80"
+                   Content="上课时间"/>
+                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectYear}" 
+                  ItemsSource="{Binding YearCollection}" Margin="5 0 0 0"/>
+                <Label Content="年" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
+                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectMonth}"
+                  ItemsSource="{Binding MonthCollection}" Margin="5 0 0 0"/>
+                <Label Content="月" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="100 0 0 0">
+                <Label Width="80" Style="{StaticResource SysConfigureLabelStyle}" Content="任课老师" FontSize="15" 
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectedTeacher}"
+                                  ItemsSource="{Binding TeacherCollection}" Width="100" Margin="5 0 0 0"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="30 0 0 0" Grid.Row="1">
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource mainColor}" 
+                   Width="100" Content="上课次数" FontSize="18" Visibility="{Binding VisRegular}"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource incomeColor}" 
+                   Width="150" Content="{Binding ClassCount}" FontSize="18" Visibility="{Binding VisRegular}"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource mainColor}" 
+                   Width="100" Content="课时费" FontSize="18" />
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource incomeColor}" 
+                   Width="150" Content="{Binding TeacherFee}" FontSize="18"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource mainColor}" 
+                   Width="100" Content="课时费合计" FontSize="18" Margin="50 0 0 0"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource incomeColor}" 
+                   Width="150" Content="{Binding TeacherFeeTotal}" FontSize="18"/>
+        </StackPanel>
+        <Button Grid.Row="2"  Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="120" Content="确定" 
+                Command="{Binding Confirm}" Margin="0 0 100 0" HorizontalAlignment="Right"/>
+    </Grid>
+</UserControl>

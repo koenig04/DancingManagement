@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.TeachingManagement.BlockTeaching.BlockTeaching"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.BlockTeaching"
+             xmlns:classList="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.Common.ClassList"
+             xmlns:traineeList="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.Common.TraineeList"
+             xmlns:traineeOperation="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.Common.TraineeOperation"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <classList:ClassList Grid.Column="0" DataContext="{Binding ClassList}"/>
+        <traineeList:TraineeList Grid.Column="1" DataContext="{Binding TraineeList}"/>
+        <local:BlockClassOperation Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding ClassOperation}"/>
+        <traineeOperation:TraineeOperation Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding TraineeOperation}"/>
+    </Grid>
+</UserControl>
