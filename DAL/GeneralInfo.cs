@@ -39,14 +39,8 @@ namespace DAL
 
         public decimal GetCurrentCapital()
         {
-            SqlParameter[] parameters = {
-                    new SqlParameter("@CurrentCapital", SqlDbType.Decimal)
-                                        };
-            parameters[0].Direction = ParameterDirection.Output;
-
-            int rowsAffected;
-            DbHelperSQL.RunProcedure("GeneralInfo_GetCurrentCapital", parameters, out rowsAffected);
-            return decimal.Parse(parameters[0].Value.ToString());
+            DataSet ds= DbHelperSQL.RunProcedure("GeneralInfo_GetCurrentCapital", null, "ds");
+            return decimal.Parse(ds.Tables[0].Rows[0][0].ToString());
         }
     }
 }

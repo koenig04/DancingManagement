@@ -61,6 +61,7 @@
     <Compile Include="PaymentManagement\NormalPayment\NormalPaymentBussiness.cs" />
     <Compile Include="PaymentManagement\PaymentManagementBussiness.cs" />
     <Compile Include="PDFExporter\PDFExporterBase.cs" />
+    <Compile Include="PDFExporter\PDFExporterBill.cs" />
     <Compile Include="PDFExporter\PDFExporterCallingList.cs" />
     <Compile Include="PDFExporter\PDFExporterOverdue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

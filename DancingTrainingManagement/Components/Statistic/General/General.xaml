@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DancingTrainingManagement.Components.Statistic.General"
+             xmlns:msg="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Message"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="250"/>
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0"  BorderBrush="{StaticResource mainColor}" BorderThickness="2"  Height="330" Width="1000">
             <GroupBox.Header>
@@ -20,11 +21,33 @@
             <Label Style="{StaticResource SysConfigureLabelStyle}" Content="学员总数" Foreground="{StaticResource mainColor}" FontSize="20" Margin="0 0 10 0" Width="100"/>
             <Label Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding TraineeCount}" FontSize="24" Foreground="#3C8D9E" Width="100"/>
             <Label Style="{StaticResource SysConfigureLabelStyle}" Content="总资产" Foreground="{StaticResource mainColor}" FontSize="20" Margin="50 0 10 0" Width="100"/>
-            <Label Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding CurrentCapital}" FontSize="24" Width="150">
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding CurrentCapital}" FontSize="24" Width="200">
                 <Label.Foreground>
                     <SolidColorBrush Color="{Binding CapitalColor}"/>
                 </Label.Foreground>
             </Label>
         </StackPanel>
+        <GroupBox Grid.Row="1"  BorderBrush="{StaticResource mainColor}" BorderThickness="2"  Height="240" Width="1000">
+            <GroupBox.Header>
+                <Label Content="导出" Style="{StaticResource SysConfigLabel}" Foreground="{StaticResource mainColor}"/>
+            </GroupBox.Header>
+        </GroupBox>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Label Content="账单导出" Style="{StaticResource LabelStyleBaseChs}" FontSize="20" Foreground="{StaticResource ResourceKey=mainColor}" Margin="50 0 30 0"/>
+                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectBillYear}" 
+                  ItemsSource="{Binding YearCollection}" Margin="5 0 0 0"/>
+                <Label Content="年" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
+                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectBillMonth}" ItemsSource="{Binding MonthCollection}" Margin="5 0 0 0"/>
+                <Label Content="月" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
+                <Button Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="80" Content="导出" BorderThickness="2" Margin="60 0 0 0" Command="{Binding ExportBill}"/>
+            </StackPanel>
+        </Grid>
+        <msg:Message Grid.Row="0" Grid.RowSpan="2" DataContext="{Binding Msg}"/>
     </Grid>
 </UserControl>

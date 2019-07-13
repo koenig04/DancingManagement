@@ -12,6 +12,7 @@ namespace Common
         public static string PDFExportPath = @"D:\导出\";
         public static string OverduePDFExportPath = PDFExportPath + @"催费提醒\";
         public static string CallingListPDFExportPath = PDFExportPath + @"花名册\";
+        public static string BillExportPath = PDFExportPath + @"账单\";
         public static string ConfigPath = AppDomain.CurrentDomain.BaseDirectory + @"configs\";
         public static string IconPath = AppDomain.CurrentDomain.BaseDirectory + @"icons\";
         public static string RegularTypePath = ConfigPath + "RegularClassType.json";

@@ -139,6 +139,10 @@ namespace DancingTrainingManagement.Components.Statistic.CommonComponent.Statist
             {
                 YearCollection.Add(i.ToString());
             }
+            //SelectStartYear = DateTime.Now.Year.ToString();
+            //SelectEndYear = DateTime.Now.Year.ToString();
+            //SelectStartMonth = DateTime.Now.Month.ToString();
+            //SelectEndMonth = DateTime.Now.Month.ToString();
         }
 
         private bool CheckYMDValidity()

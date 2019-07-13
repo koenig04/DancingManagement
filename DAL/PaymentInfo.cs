@@ -172,7 +172,7 @@ namespace DAL
             }
             else
             {
-                return null;
+                return new List<AccountInfoModel>();
             }
         }
 

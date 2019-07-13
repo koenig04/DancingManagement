@@ -1,5 +1,6 @@
 ﻿using BLL.StatisticManagement.GeneralAndExport;
 using Common;
+using DancingTrainingManagement.Components.CommonComponent.Message;
 using DancingTrainingManagement.UICore;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,94 @@ namespace DancingTrainingManagement.Components.Statistic.General
             }
         }
 
+        private string _selectedYear;
+
+        public string SelectBillYear
+        {
+            get { return _selectedYear; }
+            set
+            {
+                _selectedYear = value;
+                RaisePropertyChanged("SelectBillYear");
+            }
+        }
+
+        private string _selectedMonth;
+
+        public string SelectBillMonth
+        {
+            get { return _selectedMonth; }
+            set
+            {
+                _selectedMonth = value;
+                RaisePropertyChanged("SelectBillMonth");
+            }
+        }
+
+        private List<string> _years;
+
+        public List<string> YearCollection
+        {
+            get { return _years; }
+            set
+            {
+                _years = value;
+                RaisePropertyChanged("YearCollection");
+            }
+        }
+
+        private List<string> _months;
+
+        public List<string> MonthCollection
+        {
+            get { return _months; }
+            set
+            {
+                _months = value;
+                RaisePropertyChanged("MonthCollection");
+            }
+        }
+
+        private DelegateCommand _exportBill;
+
+        public DelegateCommand ExportBill
+        {
+            get
+            {
+                _exportBill = _exportBill ?? new DelegateCommand(new Action<object>(
+                    o =>
+                    {
+                        if (_bussiness.ExportBills(int.Parse(SelectBillYear), int.Parse(SelectBillMonth)))
+                        {
+                            Msg.Enable(Common.MessageType.ExportSuccess, Common.MessageLevel.Info);
+                        }
+                        else
+                        {
+                            Msg.Enable(Common.MessageType.ExportFailed, Common.MessageLevel.Warning);
+                        }
+                    }));
+                return _exportBill;
+            }
+            set
+            {
+                _exportBill = value;
+                RaisePropertyChanged("ExportBill");
+            }
+        }
+
+
+        private MessageViewModel _msg;
+
+        public MessageViewModel Msg
+        {
+            get { return _msg; }
+            set
+            {
+                _msg = value;
+                RaisePropertyChanged("Msg");
+            }
+        }
+
         private GeneralAndExportBussiness _bussiness;
 
         public GeneralViewModel(GeneralAndExportBussiness bussiness)
@@ -59,6 +148,22 @@ namespace DancingTrainingManagement.Components.Statistic.General
             };
             _bussiness.TraineeCountChangedEvent += count => TraineeCount = count.ToString();
             _bussiness.Init();
+
+            YearCollection = new List<string>();
+            for (int i = 2019; i < 2035; i++)
+            {
+                YearCollection.Add(i.ToString());
+            }
+            MonthCollection = new List<string>();
+            for (int i = 1; i < 13; i++)
+            {
+                MonthCollection.Add(i.ToString());
+            }
+            SelectBillYear = DateTime.Now.Year.ToString();
+            SelectBillMonth = DateTime.Now.Month.ToString();
+
+            Msg = new MessageViewModel(false);
+            Msg.OnOperateEnableEvent(false, false);
         }
     }
 }
