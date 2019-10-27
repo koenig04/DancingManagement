@@ -39,13 +39,20 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Label Content="账单导出" Style="{StaticResource LabelStyleBaseChs}" FontSize="20" Foreground="{StaticResource ResourceKey=mainColor}" Margin="50 0 30 0"/>
-                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectBillYear}" 
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="账单导出" Style="{StaticResource LabelStyleBaseChs}" FontSize="20" Foreground="{StaticResource ResourceKey=mainColor}" Margin="50 0 30 0"/>
+                    <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectBillYear}" 
                   ItemsSource="{Binding YearCollection}" Margin="5 0 0 0"/>
-                <Label Content="年" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
-                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectBillMonth}" ItemsSource="{Binding MonthCollection}" Margin="5 0 0 0"/>
-                <Label Content="月" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
-                <Button Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="80" Content="导出" BorderThickness="2" Margin="60 0 0 0" Command="{Binding ExportBill}"/>
+                    <Label Content="年" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
+                    <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectBillMonth}" ItemsSource="{Binding MonthCollection}" Margin="5 0 0 0"/>
+                    <Label Content="月" Style="{StaticResource LabelStyleBaseChs}" FontSize="14" Foreground="{StaticResource ResourceKey=mainColor}"/>
+                    <Button Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="80" Content="导出" BorderThickness="2" Margin="60 0 0 0" Command="{Binding ExportBill}"/>
+                </StackPanel>
+                <Rectangle Width="2" Height="250" Fill="#B0B0B0" Margin="50 0 50 0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="数据库备份" Style="{StaticResource LabelStyleBaseChs}" FontSize="20" Foreground="{StaticResource ResourceKey=mainColor}" Margin="50 0 30 0"/>
+                    <Button Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="80" Content="导出" BorderThickness="2" Margin="60 0 0 0" Command="{Binding ExportDB}"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
         <msg:Message Grid.Row="0" Grid.RowSpan="2" DataContext="{Binding Msg}"/>

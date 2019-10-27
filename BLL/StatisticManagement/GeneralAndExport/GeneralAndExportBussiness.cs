@@ -1,4 +1,5 @@
 ﻿using BLL.ClassManagement;
+using BLL.DBExporter;
 using BLL.PDFExporter;
 using BLL.TraineeManagement;
 using DAL;
@@ -19,6 +20,7 @@ namespace BLL.StatisticManagement.GeneralAndExport
         private TraineeInfo _traineeDal;
         private GeneralInfo _generalDal;
         private PDFExporterBill _billExporter;
+        private DBExporterGeneral _dbRelated;
 
         public GeneralAndExportBussiness(TraineeInfo traineeDal, GeneralInfo generalDal, BlockClassManagement blocks,
             RegularClassManagement regulars, TraineeManagementBussiness trainees)
@@ -26,6 +28,7 @@ namespace BLL.StatisticManagement.GeneralAndExport
             _traineeDal = traineeDal;
             _generalDal = generalDal;
             _billExporter = new PDFExporterBill(blocks, regulars, trainees);
+            _dbRelated = new DBExporterGeneral();
         }
 
         public void Init()
@@ -47,6 +50,11 @@ namespace BLL.StatisticManagement.GeneralAndExport
         public bool ExportBills(int billYear, int billMonth)
         {
             return _billExporter.Export(billYear, billMonth);
+        }
+
+        public bool ExportDB()
+        {
+            return _dbRelated.ExportDB();
         }
     }
 }

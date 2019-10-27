@@ -123,6 +123,33 @@ namespace DancingTrainingManagement.Components.Statistic.General
             }
         }
 
+        private DelegateCommand _exportDB;
+
+        public DelegateCommand ExportDB
+        {
+            get
+            {
+                _exportDB = _exportDB ?? new DelegateCommand(new Action<object>(
+                    o =>
+                    {
+                        if (_bussiness.ExportDB())
+                        {
+                            Msg.Enable(Common.MessageType.ExportSuccess, Common.MessageLevel.Info);
+                        }
+                        else
+                        {
+                            Msg.Enable(Common.MessageType.ExportFailed, Common.MessageLevel.Warning);
+                        }
+                    }));
+                return _exportDB;
+            }
+            set
+            {
+                _exportDB = value;
+                RaisePropertyChanged("ExportDB");
+            }
+        }
+
 
         private MessageViewModel _msg;
 

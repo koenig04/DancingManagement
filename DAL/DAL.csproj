@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockClassInfo.cs" />
+    <Compile Include="DBRelated.cs" />
     <Compile Include="GeneralInfo.cs" />
     <Compile Include="ItemInfo.cs" />
     <Compile Include="NameCallingInfo.cs" />
