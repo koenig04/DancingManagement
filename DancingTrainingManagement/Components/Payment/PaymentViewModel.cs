@@ -89,7 +89,7 @@ namespace DancingTrainingManagement.Components.Payment
         public PaymentViewModel(PaymentManagementBussiness bussiness)
         {
             ClassPayment = new ClassPaymentViewModel(bussiness.ClassPayment);
-            NormalPayment = new NormalPaymentViewModel(bussiness.NormalPayment);
+            NormalPayment = new NormalPaymentViewModel(bussiness.NormalPayment);            
             Msg = new MessageViewModel(false);
             Msg.OnOperateEnableEvent(false, false);
 

@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="AccountInfoModel.cs" />
     <Compile Include="CapitalModel.cs" />
+    <Compile Include="Competition\CompetitionInfo.cs" />
+    <Compile Include="Competition\CompetitionPaymentModel.cs" />
+    <Compile Include="Competition\CompetitionTraineesInfoModel.cs" />
     <Compile Include="DancingClass\BlockClassModel.cs" />
     <Compile Include="DancingClass\ClassInfoForTeacherModel.cs" />
     <Compile Include="DancingClass\ClassModel.cs" />

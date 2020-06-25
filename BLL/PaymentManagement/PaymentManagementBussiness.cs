@@ -20,7 +20,7 @@ namespace BLL.PaymentManagement
         {
             PaymentDAL = new PaymentInfo();
             ClassPayment = new ClassPaymentBussiness(block, regular, trainee, PaymentDAL, nameCalling);
-            NormalPayment = new NormalPaymentBussiness(PaymentDAL);         
+            NormalPayment = new NormalPaymentBussiness(PaymentDAL);
         }
     }
 }
