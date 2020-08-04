@@ -216,7 +216,7 @@ namespace DancingTrainingManagement.Components.CommonComponent.ClassSelecter
             }
             else
             {
-                _bussiness.TraineeCollectionChangedEvent += trainees => TraineesChangedEvent?.Invoke(trainees);
+                _bussiness.TraineeCollectionChangedEvent += trainees => TraineesChangedEvent?.Invoke(trainees.Where(t => t.State == 0).ToList());
             }
         }
 
