@@ -22,6 +22,7 @@ namespace Common
         public static string ConfigurationPath = ConfigPath + "Configuration.json";
         public static string StatisticPath = ConfigPath + "Statistic.json";
         public static string TeachingStatisticPath = ConfigPath + "TeachingStatistic.json";
+        public static string CommonConfigurationsPath = ConfigPath + "Common.json";
         public static string TeacherFeeIcon = IconPath + "teacherfee.png";
         public static string TeacherFeeIconPressed = IconPath + "teacherfeeW.png";
         public static string ClassPaymentIcon = IconPath + "dangcing.png";

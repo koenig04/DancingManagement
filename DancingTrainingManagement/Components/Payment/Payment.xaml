@@ -28,10 +28,10 @@
                           Content="一般收支" VerticalAlignment="Bottom"/>
             <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding PaymentFunc,
                           Converter={StaticResource ischeckedConverter},ConverterParameter=2}" Command="{Binding ChangePayment}" CommandParameter="2"
-                          Content="考级" VerticalAlignment="Bottom"/>
+                          Content="考级" VerticalAlignment="Bottom" Visibility="Collapsed"/>
             <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding PaymentFunc,
                           Converter={StaticResource ischeckedConverter},ConverterParameter=3}" Command="{Binding ChangePayment}" CommandParameter="3"
-                          Content="比赛" VerticalAlignment="Bottom"/>
+                          Content="比赛" VerticalAlignment="Bottom" Visibility="Collapsed"/>
         </StackPanel>
         <classPayment:ClassPayment Grid.Row="1" DataContext="{Binding ClassPayment}"/>
         <normalPayment:NormalPayment Grid.Row="1" DataContext="{Binding NormalPayment}"/>

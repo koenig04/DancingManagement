@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace DBUtility
     {
         public static string ConnectionString()
         {
-            string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+            string connectionString = CommonConfigurations.Instance.Items.ConnectionString;
             return connectionString;
         }
     }
