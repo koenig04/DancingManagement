@@ -93,7 +93,7 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
                 {
                     if (item.State == CallingState.Presence) presenceCount++;
                     ItemCollection.Add(new PresenceItemViewModel(item));
-                    if(presenceCount> 20)
+                    if(item.State == CallingState.Presence && presenceCount > 20)
                     {
                         ItemCollection.Last().ChangeToOverdue();
                     }
