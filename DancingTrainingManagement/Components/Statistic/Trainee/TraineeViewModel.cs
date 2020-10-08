@@ -40,6 +40,18 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             }
         }
 
+        private ObservableCollection<PresenceItemViewModel> _itemCollection;
+
+        public ObservableCollection<PresenceItemViewModel> ItemCollection
+        {
+            get { return _itemCollection; }
+            set
+            {
+                _itemCollection = value;
+                RaisePropertyChanged("ItemCollection");
+            }
+        }
+
         private SeriesCollection _seriesCollection;
 
         public SeriesCollection PieColletcion
@@ -53,75 +65,42 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
         }
 
         private TraineeStatisticBussiness _bussiness;
-        public TraineeViewModel(TraineeStatisticBussiness bussiness):base()
+        public TraineeViewModel(TraineeStatisticBussiness bussiness) : base()
         {
             _bussiness = bussiness;
+            ItemCollection = new ObservableCollection<PresenceItemViewModel>();
             Presence = new PresenceStatisticViewModel(bussiness.Presence);
             Sum = new PresenceSumViewModel();
             PieColletcion = new SeriesCollection();
             Presence.ClearChartEvent += () =>
             {
-                PieColletcion.Clear();
                 Sum.Clear();
             };
-            Presence.PresenceInfoChangedEvent += OnPresenceInfoChanged;
-            Presence.PresenceInfoChangedEvent += Sum.FillSum;
-            Presence.ErrOccuredEvent += (msg,level) => EnableErrMsg(msg);
+
+            Presence.ErrOccuredEvent += (msg, level) => EnableErrMsg(msg);
+
+            _bussiness.Presence.PresenceInfoChangedEvent += OnPresenceInfoChanged;
         }
 
         private void OnPresenceInfoChanged(PresenceInfo info)
         {
-            if (info.Details.Count > 0)
+            ItemCollection.Clear();
+
+            int presenceCount = 0;
+            if (info.Details != null)
             {
-                PieColletcion.Add(new PieSeries()
+                foreach (PresenceDetail item in info.Details)
                 {
-                    Title = "出勤",
-                    Fill = new SolidColorBrush(GlobalVariables.IncomeColor),
-                    DataLabels = true,
-                    Values = new ChartValues<int> { info.PresenceCount },
-                    LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "出勤", chartPoint.Participation)),
-                    LabelPosition = PieLabelPosition.OutsideSlice,
-                    Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
-                    FontWeight = FontWeight.FromOpenTypeWeight(800),
-                    FontSize = 14
-                });
-                PieColletcion.Add(new PieSeries()
-                {
-                    Title = "请假",
-                    Fill = new SolidColorBrush(GlobalVariables.SecondaryColor),
-                    DataLabels = true,
-                    Values = new ChartValues<int> { info.LeaveCount },
-                    LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "请假", chartPoint.Participation)),
-                    LabelPosition = PieLabelPosition.OutsideSlice,
-                    Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
-                    FontWeight = FontWeight.FromOpenTypeWeight(800),
-                    FontSize = 14
-                });
-                PieColletcion.Add(new PieSeries()
-                {
-                    Title = "旷课",
-                    Fill = new SolidColorBrush(GlobalVariables.ExpenseColor),
-                    DataLabels = true,
-                    Values = new ChartValues<int> { info.AbsenceCount },
-                    LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "旷课", chartPoint.Participation)),
-                    LabelPosition = PieLabelPosition.OutsideSlice,
-                    Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
-                    FontWeight = FontWeight.FromOpenTypeWeight(800),
-                    FontSize = 14
-                });
-                PieColletcion.Add(new PieSeries()
-                {
-                    Title = "送课",
-                    Fill = new SolidColorBrush(GlobalVariables.LightMainColor),
-                    DataLabels = true,
-                    Values = new ChartValues<int> { info.GivingCount },
-                    LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "送课", chartPoint.Participation)),
-                    LabelPosition = PieLabelPosition.OutsideSlice,
-                    Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
-                    FontWeight = FontWeight.FromOpenTypeWeight(800),
-                    FontSize = 14
-                });
+                    if (item.State == CallingState.Presence) presenceCount++;
+                    ItemCollection.Add(new PresenceItemViewModel(item));
+                    if(presenceCount> 20)
+                    {
+                        ItemCollection.Last().ChangeToOverdue();
+                    }
+                }
             }
+
+            Sum.FillSum(info);
         }
     }
 }

@@ -44,6 +44,16 @@ namespace BLL.NameCallingManagement
             return _dal.GetListByTrainee(traineeID, startDate, endDate);
         }
 
+        public List<NameCallingModel> GetListForCurrentTerm(string traineeID)
+        {
+            return _dal.GetListForCurrentTerm(traineeID);
+        }
+
+        public List<NameCallingModel> GetListForPreviousTerm(string traineeID)
+        {
+            return _dal.GetListForPreviousTerm(traineeID);
+        }
+
         public List<NameCallingModel> GetListByDate(DateTime callingDate)
         {
             return _dal.GetListByDate(callingDate);

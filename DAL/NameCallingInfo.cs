@@ -119,6 +119,62 @@ namespace DAL
             }
         }
 
+        public List<NameCallingModel> GetListForCurrentTerm(string traineeID)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@TermDuration",SqlDbType.Int)};
+            parameters[0].Value = traineeID;
+            parameters[1].Value = 20;
+
+            DataSet ds = DbHelperSQL.RunProcedure("NameCallingInfo_GetCurrentTermPresence_LK", parameters, "ds");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select new NameCallingModel()
+                        {
+                            ClassID = d.Field<string>("ClassID"),
+                            Presence = d.Field<string>("Presence"),
+                            Leave = d.Field<string>("Leave"),
+                            Absence = d.Field<string>("Absence"),
+                            Giving = d.Field<string>("Giving"),
+                            ClassDate = d.Field<DateTime>("ClassDate")
+                        }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<NameCallingModel> GetListForPreviousTerm(string traineeID)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@TermDuration",SqlDbType.Int)};
+            parameters[0].Value = traineeID;
+            parameters[1].Value = 20;
+
+            DataSet ds = DbHelperSQL.RunProcedure("NameCallingInfo_GetPreviousTermPresence_LK", parameters, "ds");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select new NameCallingModel()
+                        {
+                            ClassID = d.Field<string>("ClassID"),
+                            Presence = d.Field<string>("Presence"),
+                            Leave = d.Field<string>("Leave"),
+                            Absence = d.Field<string>("Absence"),
+                            Giving = d.Field<string>("Giving"),
+                            ClassDate = d.Field<DateTime>("ClassDate")
+                        }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public List<NameCallingModel> GetListByDate(DateTime callingDate)
         {
             SqlParameter[] parameters = {
@@ -146,7 +202,7 @@ namespace DAL
             {
                 return null;
             }
-        }
+        }   
 
         public void Del(string callingID)
         {

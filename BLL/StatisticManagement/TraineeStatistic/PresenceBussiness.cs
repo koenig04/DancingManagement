@@ -57,64 +57,16 @@ namespace BLL.StatisticManagement.TraineeStatistic
 
         public void GetRegularPresence(string traineeName, bool isCurrentTerm)
         {
+            //get trainee info
             TraineeModel trainee = _currentTrainees.Where(t => t.TraineeName == traineeName).First();
 
-
+            List<NameCallingModel> callings = isCurrentTerm ? 
+                _calling.GetListForCurrentTerm(trainee.TraineeID) :
+                _calling.GetListForPreviousTerm(trainee.TraineeID);
             _currentPresenceInfo = new PresenceInfo();
-            //获取历史到期时间
-            List<OverdueModel> overdues = _overdue.GetListbyTrainee(trainee.TraineeID);
-            if (overdues != null && overdues.Count > 0)
-            {
-                if (isCurrentTerm)
-                {
-                    _currentPresenceInfo.StartDate = overdues[overdues.Count - 1].OverdueDate.AddDays(1);
-                    _currentPresenceInfo.EndDate = DateTime.Now;
-                }
-                else
-                {
-                    _currentPresenceInfo.StartDate = overdues.Count > 1 ?
-                        overdues[overdues.Count - 2].OverdueDate.AddDays(1) :
-                        _currentTrainees.Where(t => t.TraineeID == trainee.TraineeID).First().CreateDate;
-                    _currentPresenceInfo.EndDate = overdues[overdues.Count - 1].OverdueDate;
-                }
-            }
-            else
-            {
-                if (isCurrentTerm)
-                {
-                    _currentPresenceInfo.StartDate = trainee.CreateDate.AddDays(-7);
-                    _currentPresenceInfo.EndDate = DateTime.Now;
-                }
-            }
-            if (_currentPresenceInfo.StartDate != default(DateTime) && _currentPresenceInfo.EndDate != default(DateTime))
-            {//获取出勤情况
-                DateTime endDateExt, startDateExt;
-                List<NameCallingModel> callingsExt;
-                List<NameCallingModel> callings = _calling.GetListByTrainee(trainee.TraineeID, _currentPresenceInfo.StartDate, _currentPresenceInfo.EndDate);
-                if (isCurrentTerm)
-                {
-                    if ((callings.Count + trainee.RemainRegularCount) % GlobalVariables.ClassCountPerTerm > 0)//统计的当期出勤情况少了
-                    {
-                        //向前寻找
-                        endDateExt = _currentPresenceInfo.StartDate.AddDays(-1);
-                        startDateExt = endDateExt.AddDays(-7);
-                        while (startDateExt >= GlobalVariables.StartDate)
-                        {
-                            callingsExt = _calling.GetListByTrainee(trainee.TraineeID, startDateExt, endDateExt);
-                            if (callingsExt.Count >= ((callings.Count + trainee.RemainRegularCount) % GlobalVariables.ClassCountPerTerm))
-                            {
-                                break;
-                            }
-                        }
-
-                    }
-                }
-                _currentPresenceInfo.FillPresence(callings, _regular, trainee.TraineeID);
-                PresenceInfoChangedEvent?.Invoke(_currentPresenceInfo);
-            }
+            _currentPresenceInfo.FillPresence(callings, _regular, trainee.TraineeID);
+            PresenceInfoChangedEvent?.Invoke(_currentPresenceInfo);
         }
-
-
     }
 
     public class PresenceInfo

@@ -15,15 +15,16 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
         {
             if (value == null)
                 return DependencyProperty.UnsetValue;
-            switch ((CallingState)value)
+            switch ((CallingStatisticState)value)
             {
-                case CallingState.Presence:
+                case CallingStatisticState.Presence:
+                case CallingStatisticState.Overdue:
                     return "出勤";
-                case CallingState.Leave:
+                case CallingStatisticState.Leave:
                     return "请假";
-                case CallingState.Absence:
+                case CallingStatisticState.Absence:
                     return "旷课";
-                case CallingState.Giving:
+                case CallingStatisticState.Giving:
                     return "送课";
                 default:
                     return "";

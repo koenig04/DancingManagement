@@ -12,4 +12,13 @@ namespace Common
         Absence,
         Giving
     }
+
+    public enum CallingStatisticState
+    {
+        Presence,
+        Leave,
+        Absence,
+        Giving,
+        Overdue
+    }
 }

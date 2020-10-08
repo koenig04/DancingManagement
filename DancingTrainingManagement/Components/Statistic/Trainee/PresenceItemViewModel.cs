@@ -34,9 +34,9 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             }
         }
 
-        private CallingState _state;
+        private CallingStatisticState _state;
 
-        public CallingState PresenceState
+        public CallingStatisticState PresenceState
         {
             get { return _state; }
             set
@@ -46,11 +46,16 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             }
         }
 
+        public void ChangeToOverdue()
+        {
+            PresenceState = CallingStatisticState.Overdue;
+        }
+
         public PresenceItemViewModel(PresenceDetail detail)
         {
             ClassName = detail.ClassName;
-            ClassDate = detail.ClassDate.ToString("yyyy年MM月dd日");
-            PresenceState = detail.State;
+            ClassDate = detail.ClassDate.ToString("yyyy/MM/dd");
+            PresenceState = (CallingStatisticState)detail.State;
         }
     }
 }

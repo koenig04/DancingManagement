@@ -15,16 +15,18 @@ namespace DancingTrainingManagement.Components.CommonComponent.Converter
         {
             if (value == null)
                 return DependencyProperty.UnsetValue;
-            switch ((CallingState)value)
+            switch ((CallingStatisticState)value)
             {
-                case CallingState.Presence:
+                case CallingStatisticState.Presence:
                     return GlobalVariables.IncomeColor;
-                case CallingState.Leave:
+                case CallingStatisticState.Leave:
                     return GlobalVariables.SecondaryColor;
-                case CallingState.Absence:
+                case CallingStatisticState.Absence:
                     return GlobalVariables.ExpenseColor;
-                case CallingState.Giving:
+                case CallingStatisticState.Giving:
                     return GlobalVariables.LightMainColor;
+                case CallingStatisticState.Overdue:
+                    return GlobalVariables.YellowColor;
                 default:
                     return System.Windows.Media.Colors.White;
             }

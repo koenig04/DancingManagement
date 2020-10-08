@@ -6,9 +6,26 @@
              xmlns:local="clr-namespace:DancingTrainingManagement.Components.Statistic.Trainee"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:msg="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Message"
+             xmlns:converter="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Converter"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <converter:PresenceColorConverter x:Key="PresenceColorConverter"/>
+        <local:PresenceTextConverter x:Key="TextConverter"/>
+        <DataTemplate DataType="{x:Type local:PresenceItemViewModel}">
+            <StackPanel Orientation="Horizontal">
+                <Label Style="{StaticResource SysConfigureLabelStyle}" Width="100" Height="45" Content="{Binding ClassDate}" 
+                       Foreground="{StaticResource mainColor}" FontSize="14"/>
+                <Label Style="{StaticResource SysConfigureLabelStyle}" Width="50" Height="45" Content="{Binding PresenceState,Converter={StaticResource TextConverter}}"
+                       FontSize="16" HorizontalContentAlignment="Center" Foreground="{StaticResource mainBackground}">
+                    <Label.Background>
+                        <SolidColorBrush Color="{Binding PresenceState,Converter={StaticResource PresenceColorConverter}}"/>
+                    </Label.Background>
+                </Label>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="620"/>
@@ -20,8 +37,17 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <local:PresenceSum Grid.Row="0" DataContext="{Binding Sum}"/>
-            <lvc:PieChart Grid.Row="1" Width="550" Height="450"
-                          Hoverable="True" DataTooltip="{x:Null}" Series="{Binding PieColletcion}"/>
+            <Border Grid.Row="1" Width="605" Height="500" BorderThickness="2" BorderBrush="{StaticResource mainColor}" CornerRadius="5">
+                <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="600" Height="495" ItemWidth="600">
+                    <ItemsControl ItemsSource="{Binding ItemCollection}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </WrapPanel>
+            </Border>   
         </Grid>
         <local:PresenceStatistic Grid.Column="1" DataContext="{Binding Presence}"/>
         <msg:Message Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Msg}"/>

@@ -3,12 +3,16 @@ using BLL.StatisticManagement.TraineeStatistic;
 using BLL.TraineeManagement;
 using Common;
 using DancingTrainingManagement.UICore;
+using LiveCharts;
+using LiveCharts.Wpf;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Media;
 
 namespace DancingTrainingManagement.Components.Statistic.Trainee
 {
@@ -34,8 +38,8 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             set
             {
                 _selectedClass = value;
-                if(!string.IsNullOrEmpty(value))
-                _bussiness.GetTrainees(value);
+                if (!string.IsNullOrEmpty(value))
+                    _bussiness.GetTrainees(value);
                 RaisePropertyChanged("SelectedClass");
             }
         }
@@ -135,6 +139,18 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             }
         }
 
+        private SeriesCollection _seriesCollection;
+
+        public SeriesCollection PieColletcion
+        {
+            get { return _seriesCollection; }
+            set
+            {
+                _seriesCollection = value;
+                RaisePropertyChanged("PieColletcion");
+            }
+        }
+
         public delegate void ErrOccured(MessageType msg, MessageLevel level = MessageLevel.Warning);
         public event ErrOccured ErrOccuredEvent;
         public delegate void ClearChart();
@@ -148,7 +164,7 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             _bussiness = bussiness;
             TermState = 0;
             PresenceCollection = new ObservableCollection<PresenceItemViewModel>();
-
+            PieColletcion = new SeriesCollection();
             ClassCollection = new ObservableCollection<string>();
             foreach (RegularClassModel item in _bussiness.GetRegularClasses())
             {
@@ -185,13 +201,62 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
 
         private void OnPresenceInfoChanged(PresenceInfo info)
         {
-            if (info.Details != null)
+            PieColletcion.Clear();
+
+            if (info.Details.Count > 0)
             {
-                foreach (PresenceDetail item in info.Details)
-                {
-                    PresenceCollection.Add(new PresenceItemViewModel(item));
-                }
-                PresenceInfoChangedEvent?.Invoke(info);
+                if (info.PresenceCount > 0)
+                    PieColletcion.Add(new PieSeries()
+                    {
+                        Title = "出勤",
+                        Fill = new SolidColorBrush(GlobalVariables.IncomeColor),
+                        DataLabels = true,
+                        Values = new ChartValues<int> { info.PresenceCount },
+                        LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "出勤", chartPoint.Participation)),
+                        LabelPosition = PieLabelPosition.OutsideSlice,
+                        Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
+                        FontWeight = FontWeight.FromOpenTypeWeight(800),
+                        FontSize = 14
+                    });
+                if (info.LeaveCount > 0)
+                    PieColletcion.Add(new PieSeries()
+                    {
+                        Title = "请假",
+                        Fill = new SolidColorBrush(GlobalVariables.SecondaryColor),
+                        DataLabels = true,
+                        Values = new ChartValues<int> { info.LeaveCount },
+                        LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "请假", chartPoint.Participation)),
+                        LabelPosition = PieLabelPosition.OutsideSlice,
+                        Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
+                        FontWeight = FontWeight.FromOpenTypeWeight(800),
+                        FontSize = 14
+                    });
+                if (info.AbsenceCount > 0)
+                    PieColletcion.Add(new PieSeries()
+                    {
+                        Title = "旷课",
+                        Fill = new SolidColorBrush(GlobalVariables.ExpenseColor),
+                        DataLabels = true,
+                        Values = new ChartValues<int> { info.AbsenceCount },
+                        LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "旷课", chartPoint.Participation)),
+                        LabelPosition = PieLabelPosition.OutsideSlice,
+                        Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
+                        FontWeight = FontWeight.FromOpenTypeWeight(800),
+                        FontSize = 14
+                    });
+                if (info.GivingCount > 0)
+                    PieColletcion.Add(new PieSeries()
+                    {
+                        Title = "送课",
+                        Fill = new SolidColorBrush(GlobalVariables.LightMainColor),
+                        DataLabels = true,
+                        Values = new ChartValues<int> { info.GivingCount },
+                        LabelPoint = new Func<ChartPoint, string>(chartPoint => string.Format("{0} ({1:P})", "送课", chartPoint.Participation)),
+                        LabelPosition = PieLabelPosition.OutsideSlice,
+                        Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0)),
+                        FontWeight = FontWeight.FromOpenTypeWeight(800),
+                        FontSize = 14
+                    });
             }
         }
 
@@ -201,7 +266,7 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             {
                 return EnableErrMsg(MessageType.TraineeStatisticClassErr);
             }
-            if(string.IsNullOrEmpty(SelectTrainee))
+            if (string.IsNullOrEmpty(SelectTrainee))
             {
                 return EnableErrMsg(MessageType.TraineeStatisticTraineeErr);
             }
