@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.CommonComponent.Calender.Calender"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Calender"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="1036">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:ItemContent}">
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Width="74" Height="{Binding ContentHeight}" Content="{Binding Content}" FontSize="12" Foreground="Black" Padding="0"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:CalenderItem}">
+            <StackPanel Orientation="Vertical">
+                <Label Style="{StaticResource SysConfigureLabelStyle}" Width="74" Height="40" Content="{Binding Day}" 
+                       Foreground="{StaticResource mainColor}" FontSize="24"/>
+                <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74" Height="80" ItemWidth="74">
+                    <ItemsControl ItemsSource="{Binding ItemContents}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </WrapPanel>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <local:CalenderHeader Grid.Row="0"/>
+        <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1036" Height="420" ItemWidth="1036" Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding DayCollection}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </WrapPanel>
+    </Grid>
+</UserControl>

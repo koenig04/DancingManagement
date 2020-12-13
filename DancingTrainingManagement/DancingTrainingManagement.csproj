@@ -67,6 +67,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\CommonComponent\Calender\Calender.xaml.cs">
+      <DependentUpon>Calender.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\Calender\CalenderHeader.xaml.cs">
+      <DependentUpon>CalenderHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\Calender\CalenderItem.cs" />
+    <Compile Include="Components\CommonComponent\Calender\CalenderViewModel.cs" />
+    <Compile Include="Components\CommonComponent\Calender\ItemContent.cs" />
     <Compile Include="Components\CommonComponent\ClassSelecter\ClassSelecter.xaml.cs">
       <DependentUpon>ClassSelecter.xaml</DependentUpon>
     </Compile>
@@ -84,6 +93,14 @@
       <DependentUpon>OperationMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\CommonComponent\Message\OperationMessageViewModel.cs" />
+    <Compile Include="Components\CommonComponent\TeacherSelecter\TeacherSelecterWithArrow.xaml.cs">
+      <DependentUpon>TeacherSelecterWithArrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\TeacherSelecter\TeacherSelecterWithArrowViewModel.cs" />
+    <Compile Include="Components\CommonComponent\YearMonthSelecter\YearMonthSelecterWithArrow.xaml.cs">
+      <DependentUpon>YearMonthSelecterWithArrow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\YearMonthSelecter\YearMonthSelecterWithArrowViewModel.cs" />
     <Compile Include="Components\NameCallingManagement\EditNameCalling\EditNameCalling.xaml.cs">
       <DependentUpon>EditNameCalling.xaml</DependentUpon>
     </Compile>
@@ -290,6 +307,14 @@
     <Compile Include="UICore\DelegateCommand.cs" />
     <Compile Include="UICore\NotificationObject.cs" />
     <Compile Include="UICore\ViewModelBase.cs" />
+    <Page Include="Components\CommonComponent\Calender\Calender.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CommonComponent\Calender\CalenderHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\CommonComponent\ClassSelecter\ClassSelecter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -299,6 +324,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\CommonComponent\Message\OperationMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CommonComponent\TeacherSelecter\TeacherSelecterWithArrow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CommonComponent\YearMonthSelecter\YearMonthSelecterWithArrow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

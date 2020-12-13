@@ -47,6 +47,7 @@
     <Compile Include="ClassManagement\BlockClassManagement.cs" />
     <Compile Include="ClassManagement\RegularClassManagement.cs" />
     <Compile Include="CommonBussiness\ClassSelecterBussiness.cs" />
+    <Compile Include="CommonBussiness\TeacherSelecterBussiness.cs" />
     <Compile Include="DBExporter\DBExporterGeneral.cs" />
     <Compile Include="ItemManagement\ItemManagementBussiness.cs" />
     <Compile Include="Login\LoginBussiness.cs" />

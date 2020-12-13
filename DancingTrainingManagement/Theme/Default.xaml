@@ -15,6 +15,27 @@
 
     <converter:VisibilityConverter x:Key="visconverter"/>
 
+    <Style x:Key="TriangleButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Polygon x:Name="ButtonPolygon" Stretch="Fill" Points="0,50 100,0 100,100" Stroke="{StaticResource ResourceKey=mainColor }" StrokeThickness="2">
+                            <Polygon.Fill>
+                                <SolidColorBrush Color="#246EB9"/>
+                            </Polygon.Fill>
+                        </Polygon>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonPolygon" Property="Fill" Value="#F4F4F4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+            </Setter>
+    </Style>
+
     <!--默认的中文ComboBox样式-->
     <Style TargetType="{x:Type ComboBox}" x:Key="ComboBoxStyleBase">
         <Setter Property="Height" Value="30"/>

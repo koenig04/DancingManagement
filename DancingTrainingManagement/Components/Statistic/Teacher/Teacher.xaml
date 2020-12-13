@@ -8,32 +8,32 @@
              xmlns:summary="clr-namespace:DancingTrainingManagement.Components.Statistic.CommonComponent.Summary"
              xmlns:msg="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Message"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:ymd ="clr-namespace:DancingTrainingManagement.Components.CommonComponent.YearMonthSelecter"
+             xmlns:teacher ="clr-namespace:DancingTrainingManagement.Components.CommonComponent.TeacherSelecter"
+             xmlns:calender="clr-namespace:DancingTrainingManagement.Components.CommonComponent.Calender"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <!--<RowDefinition Height="100"/>-->
+            <RowDefinition Height="80"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="680"/>
+        <Grid.ColumnDefinitions>            
+            <ColumnDefinition Width="800"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <common:StatisticHeader Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Head}"/>
-        <lvc:CartesianChart Grid.Column="0" Grid.Row="1" Width="650" Height="500" LegendLocation="Bottom" FontSize="14"
-                          Hoverable="True" DataTooltip="{x:Null}" Series="{Binding ColumnColletcion}" Visibility="{Binding ChartVis}">
-            <lvc:CartesianChart.AxisX>
-                <lvc:Axis Labels="{Binding Labels}" FontWeight="Bold" FontSize="14"/>
-            </lvc:CartesianChart.AxisX>
-            <lvc:CartesianChart.AxisY>
-                <lvc:Axis FontWeight="Bold" FontSize="14" MinValue="0">
-                    <lvc:Axis.Separator>
-                        <lvc:Separator MaxWidth="20"/>
-                    </lvc:Axis.Separator>
-                </lvc:Axis>
-            </lvc:CartesianChart.AxisY>
-        </lvc:CartesianChart>
-        <summary:Summary Grid.Column="1" Grid.Row="1" DataContext="{Binding Summary}"/>
-        <msg:Message Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Msg}"/>
+        <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <ymd:YearMonthSelecterWithArrow  DataContext="{Binding YMDSelecter}" Margin="0 0 160 0"/>
+            <teacher:TeacherSelecterWithArrow  DataContext="{Binding TeacherSelecter}"/>
+        </StackPanel> 
+        
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Style="{StaticResource LabelStyleBaseChs}" Foreground="{StaticResource mainColor}" Content="共" Width="30" FontSize="20"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource secondaryMainColor}" 
+                   Width="60" Content="{Binding TotalClassCount}" FontSize="20"/>
+            <Label Style="{StaticResource LabelStyleBaseChs}" Foreground="{StaticResource mainColor}" Content="节" Width="30" FontSize="20"/>
+        </StackPanel>
+        <calender:Calender Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Calender}"/>
     </Grid>
 </UserControl>
