@@ -208,5 +208,23 @@ namespace DAL
 
             DbHelperSQL.RunProcedure("ClassPaymentInfo_DEL_LK", parameters, out rowsAffected);
         }
+
+        public void GetClassPayment(string traineeID, bool isCurrent, ref string paymentDate, ref string termCount)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID",SqlDbType.VarChar,50),
+                    new SqlParameter("@IsCurrent", SqlDbType.VarChar,50)
+                                        };
+            parameters[0].Value = traineeID;
+            parameters[1].Value = isCurrent;
+
+            DataSet ds = DbHelperSQL.RunProcedure("AccountInfo_GetClassPayment_LK", parameters, "ds");
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                paymentDate = ds.Tables[0].Rows[0].Field<DateTime>("PaymentDate").ToString("yyyy年MM月dd日");
+                termCount = ds.Tables[0].Rows[0].Field<int>("PaymentTerms").ToString();
+            }
+        }
     }
 }

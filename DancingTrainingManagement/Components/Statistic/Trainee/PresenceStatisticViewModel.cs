@@ -151,6 +151,23 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
             }
         }
 
+        private string paymentDate_;
+
+        public string PaymentDate
+        {
+            get { return paymentDate_; }
+            set { paymentDate_ = value; RaisePropertyChanged("PaymentDate"); }
+        }
+
+        private string paymentCount_;
+
+        public string PaymentCount
+        {
+            get { return paymentCount_; }
+            set { paymentCount_ = value; RaisePropertyChanged("PaymentCount"); }
+        }
+
+
         public delegate void ErrOccured(MessageType msg, MessageLevel level = MessageLevel.Warning);
         public event ErrOccured ErrOccuredEvent;
         public delegate void ClearChart();
@@ -258,6 +275,9 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
                         FontSize = 14
                     });
             }
+
+            PaymentDate = info.PaymentDate;
+            PaymentCount = info.PaymentCount;
         }
 
         private bool CheckValidity()

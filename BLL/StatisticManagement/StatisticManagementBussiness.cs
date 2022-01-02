@@ -29,7 +29,7 @@ namespace BLL.StatisticManagement
             GeneralDal = new GeneralInfo();
             Finance = new FinanceStatisticBussiness(paymentDal, trainees, blocks, regulars, GeneralDal);
             Teacher = new TeachingStatisticBussiness(calling, regulars, blocks);
-            Trainee = new TraineeStatisticBussiness(trainees, regulars, new RegularTraineeBussiness(trainee), overdue, calling);
+            Trainee = new TraineeStatisticBussiness(trainees, regulars, new RegularTraineeBussiness(trainee), overdue, calling, paymentDal);
             General = new GeneralAndExportBussiness(trainees.Dal, GeneralDal, blocks, regulars, trainees);
         }
     }

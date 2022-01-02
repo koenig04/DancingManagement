@@ -4,6 +4,7 @@ using BLL.OverdueManagement;
 using BLL.TeachingManagement.RegularTeaching;
 using BLL.TraineeManagement;
 using Common;
+using DAL;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -26,11 +27,13 @@ namespace BLL.StatisticManagement.TraineeStatistic
         private RegularTraineeBussiness _regularTrainees;
         private OverdueManagementBussiness _overdue;
         private NameCallingBussiness _calling;
+        private PaymentInfo _paymentDal;
 
         private List<TraineeModel> _currentTrainees;
         private PresenceInfo _currentPresenceInfo;
         public PresenceBussiness(TraineeManagementBussiness trainees, RegularClassManagement regular,
-            RegularTraineeBussiness regularTrainees, OverdueManagementBussiness overdue, NameCallingBussiness calling)
+            RegularTraineeBussiness regularTrainees, OverdueManagementBussiness overdue, NameCallingBussiness calling,
+             PaymentInfo paymentDal)
         {
             _regular = regular;
             _trainees = trainees;
@@ -43,6 +46,7 @@ namespace BLL.StatisticManagement.TraineeStatistic
                 _currentTrainees = traineeCollection;
                 TraineeChangedEvent?.Invoke(_currentTrainees);
             };
+            _paymentDal = paymentDal;
         }
 
         public List<RegularClassModel> GetRegularClasses()
@@ -60,11 +64,18 @@ namespace BLL.StatisticManagement.TraineeStatistic
             //get trainee info
             TraineeModel trainee = _currentTrainees.Where(t => t.TraineeName == traineeName).First();
 
-            List<NameCallingModel> callings = isCurrentTerm ? 
+            List<NameCallingModel> callings = isCurrentTerm ?
                 _calling.GetListForCurrentTerm(trainee.TraineeID) :
                 _calling.GetListForPreviousTerm(trainee.TraineeID);
             _currentPresenceInfo = new PresenceInfo();
             _currentPresenceInfo.FillPresence(callings, _regular, trainee.TraineeID);
+
+            //get payment info
+            string paymentDate = string.Empty, paymentCount = string.Empty;
+            _paymentDal.GetClassPayment(trainee.TraineeID, isCurrentTerm, ref paymentDate, ref paymentCount);
+            _currentPresenceInfo.PaymentDate = paymentDate;
+            _currentPresenceInfo.PaymentCount = paymentCount;
+
             PresenceInfoChangedEvent?.Invoke(_currentPresenceInfo);
         }
     }
@@ -74,6 +85,8 @@ namespace BLL.StatisticManagement.TraineeStatistic
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public List<PresenceDetail> Details { get; set; }
+        public string PaymentDate { get; set; }
+        public string PaymentCount { get; set; }
         public int TotalCount
         {
             get
