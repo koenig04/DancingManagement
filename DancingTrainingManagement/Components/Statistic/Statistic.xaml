@@ -9,6 +9,7 @@
              xmlns:finance="clr-namespace:DancingTrainingManagement.Components.Statistic.Finance"
              xmlns:teacher="clr-namespace:DancingTrainingManagement.Components.Statistic.Teacher"
              xmlns:trainee="clr-namespace:DancingTrainingManagement.Components.Statistic.Trainee"
+             xmlns:class="clr-namespace:DancingTrainingManagement.Components.Statistic.Class"
              mc:Ignorable="d"             
              d:DesignHeight="700" d:DesignWidth="1040" Visibility="{Binding Vis}">
     <UserControl.Resources>
@@ -29,10 +30,13 @@
                 ConverterParameter=1}" Command="{Binding ChangeStatisticFunc}" CommandParameter="1" Content="教师统计" VerticalAlignment="Bottom"/>
             <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding StatisticFunc,Converter={StaticResource ischeckedConverter},
                 ConverterParameter=2}" Command="{Binding ChangeStatisticFunc}" CommandParameter="2" Content="学员统计" VerticalAlignment="Bottom"/>
+            <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding StatisticFunc,Converter={StaticResource ischeckedConverter},
+                ConverterParameter=2}" Command="{Binding ChangeStatisticFunc}" CommandParameter="4" Content="班级统计" VerticalAlignment="Bottom"/>
         </StackPanel>
         <general:General Grid.Row="1" DataContext="{Binding General}"/>
         <finance:Finance Grid.Row="1" DataContext="{Binding Finance}"/>
         <teacher:Teacher Grid.Row="1" DataContext="{Binding Teacher}"/>
         <trainee:Trainee Grid.Row="1" DataContext="{Binding Trainee}"/>
+        <class:Class Grid.Row="1" DataContext="{Binding ClassStatistic}"/>
     </Grid>
 </UserControl>

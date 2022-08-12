@@ -160,6 +160,10 @@
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Payment\PaymentViewModel.cs" />
+    <Compile Include="Components\Statistic\Class\Class.xaml.cs">
+      <DependentUpon>Class.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Class\ClassViewModel.cs" />
     <Compile Include="Components\Statistic\CommonComponent\StatisticHead\ColorConverter.cs" />
     <Compile Include="Components\Statistic\CommonComponent\StatisticHead\DateSelecter.xaml.cs">
       <DependentUpon>DateSelecter.xaml</DependentUpon>
@@ -380,6 +384,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\Payment\Payment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Class\Class.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

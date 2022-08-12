@@ -1,6 +1,7 @@
 ﻿using BLL.ClassManagement;
 using BLL.NameCallingManagement;
 using BLL.OverdueManagement;
+using BLL.StatisticManagement.ClassStatistic;
 using BLL.StatisticManagement.FinanceStatistic;
 using BLL.StatisticManagement.GeneralAndExport;
 using BLL.StatisticManagement.TeachingStatistic;
@@ -21,6 +22,7 @@ namespace BLL.StatisticManagement
         public TeachingStatisticBussiness Teacher { get; private set; }
         public TraineeStatisticBussiness Trainee { get; private set; }
         public GeneralAndExportBussiness General { get; private set; }
+        public ClassStatisticBussiness ClassStatistic { get; private set; }
         public GeneralInfo GeneralDal { get; private set; }
 
         public StatisticManagementBussiness(PaymentInfo paymentDal, TraineeManagementBussiness trainees, BlockClassManagement blocks, RegularClassManagement regulars,
@@ -31,6 +33,7 @@ namespace BLL.StatisticManagement
             Teacher = new TeachingStatisticBussiness(calling, regulars, blocks);
             Trainee = new TraineeStatisticBussiness(trainees, regulars, new RegularTraineeBussiness(trainee), overdue, calling, paymentDal);
             General = new GeneralAndExportBussiness(trainees.Dal, GeneralDal, blocks, regulars, trainees);
+            ClassStatistic = new ClassStatisticBussiness(regulars);
         }
     }
 }

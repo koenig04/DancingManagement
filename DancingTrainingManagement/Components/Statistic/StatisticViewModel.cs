@@ -1,4 +1,5 @@
 ﻿using BLL.StatisticManagement;
+using DancingTrainingManagement.Components.Statistic.Class;
 using DancingTrainingManagement.Components.Statistic.Finance;
 using DancingTrainingManagement.Components.Statistic.General;
 using DancingTrainingManagement.Components.Statistic.Teacher;
@@ -25,6 +26,7 @@ namespace DancingTrainingManagement.Components.Statistic
                 Teacher.OnOperateEnableEvent(true, value == 1 ? true : false);
                 Trainee.OnOperateEnableEvent(true, value == 2 ? true : false);
                 General.OnOperateEnableEvent(true, value == 3 ? true : false);
+                ClassStatistic.OnOperateEnableEvent(true, value == 4 ? true : false);
                 RaisePropertyChanged("StatisticFunc");
             }
         }
@@ -97,6 +99,17 @@ namespace DancingTrainingManagement.Components.Statistic
             }
         }
 
+        private ClassViewModel classStatistic_;
+
+        public ClassViewModel ClassStatistic
+        {
+            get { return classStatistic_; }
+            set
+            {
+                classStatistic_ = value; RaisePropertyChanged("ClassStatistic");
+            }
+        }
+
 
         public StatisticViewModel(StatisticManagementBussiness bussiness)
         {
@@ -104,6 +117,7 @@ namespace DancingTrainingManagement.Components.Statistic
             Teacher = new TeacherViewModel(bussiness.Teacher);
             Trainee = new TraineeViewModel(bussiness.Trainee);
             General = new GeneralViewModel(bussiness.General);
+            ClassStatistic = new ClassViewModel(bussiness.ClassStatistic);
             StatisticFunc = 3;
         }
     }
