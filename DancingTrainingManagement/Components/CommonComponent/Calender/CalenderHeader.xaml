@@ -8,20 +8,20 @@
              d:DesignHeight="60" d:DesignWidth="1036" Background="{StaticResource darkMainBackColor}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
+            <ColumnDefinition Width="74"/>
         </Grid.ColumnDefinitions>
         
         <Label Grid.Column="0" Style="{StaticResource LabelStyleBaseChs}" Foreground="White" Content="一" Width="30" FontSize="20"/>

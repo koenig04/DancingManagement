@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 namespace DancingTrainingManagement.Components.CommonComponent.Calender
 {
@@ -21,6 +22,15 @@ namespace DancingTrainingManagement.Components.CommonComponent.Calender
             }
         }
 
+        private Color color_;
+
+        public Color DayColor
+        {
+            get { return color_; }
+            set { color_ = value; RaisePropertyChanged("DayColor"); }
+        }
+
+
         private ObservableCollection<ItemContent> _itemContents;
 
         public ObservableCollection<ItemContent> ItemContents
@@ -35,21 +45,31 @@ namespace DancingTrainingManagement.Components.CommonComponent.Calender
 
         const int TOTAL_HEIGHT = 80;
 
-        public CalenderItem(int day)
+        public CalenderItem(int year,int month, int day)
         {
-            Day = day.ToString();
-            ItemContents = new ObservableCollection<ItemContent>();
-            for (int i = 0; i < 3; i++)
+            if (day > 0)
             {
-                ItemContents.Add(new ItemContent("三级1班  *2"));
+                Day = day.ToString();
+                DateTime currentDay = Convert.ToDateTime(year.ToString() + "-" + month.ToString() + "-" + day.ToString());
+                var dayOfWeek = currentDay.DayOfWeek;
+                if(dayOfWeek== DayOfWeek.Saturday||dayOfWeek== DayOfWeek.Sunday)
+                {
+                    DayColor = Common.GlobalVariables.ExpenseColor;
+                }else
+                {
+                    DayColor = Common.GlobalVariables.MainColor;
+                }
+
+                ItemContents = new ObservableCollection<ItemContent>();
+
+                AdjustHeight();
             }
-            AdjustHeight();
         }
 
         public void UpdataContents(List<string> contents)
         {
             ItemContents.Clear();
-            foreach(string content in contents)
+            foreach (string content in contents)
             {
                 ItemContents.Add(new ItemContent(content));
             }
@@ -58,7 +78,7 @@ namespace DancingTrainingManagement.Components.CommonComponent.Calender
 
         private void AdjustHeight()
         {
-            foreach(ItemContent content in ItemContents)
+            foreach (ItemContent content in ItemContents)
             {
                 content.ContentHeight = TOTAL_HEIGHT / ItemContents.Count;
             }

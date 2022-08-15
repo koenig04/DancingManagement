@@ -1,4 +1,5 @@
 ﻿using BLL.TeacherManagement;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,12 @@ namespace BLL.CommonBussiness
             return TeacherManagementBussiness.Instance.Teachers[currentTeacherIndex_].TeacherName;
         }
 
-        public string ChangeTeacher(int changing)
+        public TeacherModel GetCurrentTeacherModel()
+        {
+            return TeacherManagementBussiness.Instance.Teachers[currentTeacherIndex_];
+        }
+
+        public TeacherModel ChangeTeacher(int changing)
         {
             currentTeacherIndex_ += changing;
             if (currentTeacherIndex_ < 0)
@@ -36,7 +42,7 @@ namespace BLL.CommonBussiness
             }
 
             SelectedTeacherChangedEvent?.Invoke(TeacherManagementBussiness.Instance.Teachers[currentTeacherIndex_].TeacherID);
-            return TeacherManagementBussiness.Instance.Teachers[currentTeacherIndex_].TeacherName;
+            return TeacherManagementBussiness.Instance.Teachers[currentTeacherIndex_];
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BLL.StatisticManagement.TeachingStatistic;
+using BLL.TeacherManagement;
 using Common;
 using DancingTrainingManagement.Components.CommonComponent.Calender;
 using DancingTrainingManagement.Components.CommonComponent.TeacherSelecter;
@@ -8,6 +9,7 @@ using DancingTrainingManagement.Components.Statistic.CommonComponent.Summary;
 using DancingTrainingManagement.UICore;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,13 +56,81 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
             }
         }
 
+        private string count_;
 
+        public string TotalClassCount
+        {
+            get { return count_; }
+            set { count_ = value; RaisePropertyChanged("TotalClassCount"); }
+        }
+
+
+        private TeacherModel currentTeacher_ = null;
+        private int currentYear_ = 0, currentMonth_ = 0;
+        private TeachingStatisticBussiness bussiness_;
 
         public TeacherViewModel(TeachingStatisticBussiness bussiness)
         {
+            bussiness_ = bussiness;
+            bussiness_.IndividualTeacherCountInfoChangedEvent += OnIndividualTeacherCountChanged;
+
             YMDSelecter = new YearMonthSelecterWithArrowViewModel();
+            YMDSelecter.YearMonthChangedEvent += (year, month) =>
+              {
+                  currentYear_ = year;
+                  currentMonth_ = month;
+                  SearchTeacherInfo();
+              };
             TeacherSelecter = new TeacherSelecterWithArrowViewModel();
+            TeacherSelecter.SelectedTeacherChangedEvent += teacher =>
+              {
+                  currentTeacher_ = teacher;
+                  SearchTeacherInfo();
+              };
             Calender = new CalenderViewModel();
+
+            currentYear_ = DateTime.Now.Year;
+            currentMonth_ = DateTime.Now.Month;
+            currentTeacher_ = TeacherManagementBussiness.Instance.Teachers[0];
+            SearchTeacherInfo();
+        }
+
+        private void OnIndividualTeacherCountChanged(TeachingCountGroup info)
+        {
+            int totalCount = 0;
+            List<CalenderItemInfoModel> infos = new List<CalenderItemInfoModel>();
+            foreach (var i in info.DetailsGroup)
+            {
+                if (i.Value != null)
+                {
+                    List<string> content = new List<string>();
+                    List<string> classNames = (from c in i.Value
+                                               select c.ClassName).Distinct().ToList();
+                    foreach (var name in classNames)
+                    {
+                        int classCount = i.Value.Count(c => c.ClassName == name);
+                        content.Add(name + " *" + classCount.ToString());
+                        totalCount += classCount;
+                    }
+
+                    infos.Add(new CalenderItemInfoModel(i.Key.Day.ToString(), content));
+                }
+            }
+            Calender.UpdateInfo(infos);
+            TotalClassCount = totalCount.ToString();
+        }
+
+        private void SearchTeacherInfo()
+        {
+            if (currentMonth_ != 0 && currentYear_ != 0 && currentTeacher_ != null)
+            {
+                Calender.UpdateDateInfo(currentYear_, currentMonth_);
+
+                DateTime startDate = Convert.ToDateTime(currentYear_.ToString() + "-" + currentMonth_.ToString() + "-1");
+                DateTime endDate = startDate.AddMonths(1);
+
+                bussiness_.SearchTeachingCountForIndividualTeacher(startDate, endDate, currentTeacher_.TeacherID);
+            }
         }
     }
 }

@@ -47,5 +47,34 @@ namespace BLL.StatisticManagement.TeachingStatistic
                 }
             }
         }
+
+        public TeachingCountGroup(List<ClassInfoForTeacherModel> details, string teacherID,
+            DateTime startDate, DateTime endDate, RegularClassManagement regularClass)
+        {
+            TeacherID = teacherID;
+            TeacherName = TeacherManagementBussiness.Instance.Teachers.Where(t => t.TeacherID == teacherID).First().TeacherName;
+            List<DateTime> spans = new List<DateTime>();
+            int dayCount = (int)(endDate - startDate).TotalDays;
+            for (int i=0;i<dayCount;i++)
+            {
+                spans.Add(startDate.AddDays(i));
+            }
+
+            DetailsGroup = new Dictionary<DateTime, List<ClassInfoForTeacherModel>>();
+            foreach (var span in spans)
+            {
+                DetailsGroup.Add(span,
+                    details == null ?
+                    null :
+                    details.Where(d => d.ClassDate == span).ToList());
+                if (DetailsGroup[span] != null)
+                {
+                    foreach (ClassInfoForTeacherModel item in DetailsGroup[span])
+                    {
+                        item.ClassName = regularClass.GetClassNameInHis(item.ClassID, item.ClassDate);
+                    }
+                }
+            }
+        }
     }
 }

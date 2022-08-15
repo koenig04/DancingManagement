@@ -8,22 +8,28 @@
              d:DesignHeight="480" d:DesignWidth="1036">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type local:ItemContent}">
-            <Label Style="{StaticResource SysConfigureLabelStyle}" Width="74" Height="{Binding ContentHeight}" Content="{Binding Content}" FontSize="12" Foreground="Black" Padding="0"/>
+            <Label Style="{StaticResource SysConfigureLabelStyle}" Width="74" Height="{Binding ContentHeight}" Content="{Binding Content}" FontSize="12" 
+                   Foreground="Black" Padding="0" VerticalAlignment="Top"/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:CalenderItem}">
-            <StackPanel Orientation="Vertical">
-                <Label Style="{StaticResource SysConfigureLabelStyle}" Width="74" Height="40" Content="{Binding Day}" 
-                       Foreground="{StaticResource mainColor}" FontSize="24"/>
-                <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74" Height="80" ItemWidth="74">
-                    <ItemsControl ItemsSource="{Binding ItemContents}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </WrapPanel>
-            </StackPanel>
+            <Border Width="74" Height="130" BorderBrush="White" BorderThickness="1" CornerRadius="5">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" >
+                    <Label Style="{StaticResource SysConfigureLabelStyle}" Width="74" Height="40" Content="{Binding Day}" FontSize="24" HorizontalContentAlignment="Center">
+                        <Label.Foreground>
+                            <SolidColorBrush Color="{Binding DayColor}"/>
+                        </Label.Foreground>
+                    </Label>
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74" Height="100" ItemWidth="74">
+                        <ItemsControl ItemsSource="{Binding ItemContents}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" VerticalAlignment="Top"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>

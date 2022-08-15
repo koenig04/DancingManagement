@@ -4,15 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DancingTrainingManagement.Components.Statistic.Class"
+             xmlns:header ="clr-namespace:DancingTrainingManagement.Components.Statistic.CommonComponent.StatisticHead"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <Grid>        
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--<GroupBox Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource mainColor}" BorderThickness="2"  Height="280" Width="500">
@@ -20,12 +17,13 @@
                 <Label Content="出勤率" Style="{StaticResource SysConfigLabel}" Foreground="{StaticResource mainColor}"/>
             </GroupBox.Header>
         </GroupBox>-->
-        <Grid Grid.Row="0" Grid.Column="0">
+        <header:DateSelecter Grid.Row="0" Grid.ColumnSpan="2" DataContext="{Binding DateSelecter}"/>
+        <!--<Grid Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Width="100" Style="{StaticResource SysConfigureLabelStyle}" Content="出勤率" FontSize="18" 
                                Foreground="{StaticResource ResourceKey=mainColor}"/>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

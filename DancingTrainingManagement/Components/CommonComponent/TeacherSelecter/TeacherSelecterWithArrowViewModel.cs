@@ -1,5 +1,6 @@
 ﻿using BLL.CommonBussiness;
 using DancingTrainingManagement.UICore;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,9 @@ namespace DancingTrainingManagement.Components.CommonComponent.TeacherSelecter
                 _changeTeacher = _changeTeacher ?? new DelegateCommand(new Action<object>(
                     o =>
                     {
-                        TeacherName = _bussiness.ChangeTeacher(int.Parse(o.ToString()));
+                        currentTeacher_ = _bussiness.ChangeTeacher(int.Parse(o.ToString()));
+                        TeacherName = currentTeacher_.TeacherName;
+                        SelectedTeacherChangedEvent?.Invoke(currentTeacher_);
                     }));
                 return _changeTeacher;
             }
@@ -41,7 +44,10 @@ namespace DancingTrainingManagement.Components.CommonComponent.TeacherSelecter
             }
         }
 
+        public delegate void SelectedTeacherChanged(TeacherModel teacher);
+        public event SelectedTeacherChanged SelectedTeacherChangedEvent;
 
+        private TeacherModel currentTeacher_;
         private TeacherSelecterBussiness _bussiness;
         public TeacherSelecterWithArrowViewModel()
         {

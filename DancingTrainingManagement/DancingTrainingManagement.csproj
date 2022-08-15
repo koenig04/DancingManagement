@@ -70,6 +70,7 @@
     <Compile Include="Components\CommonComponent\Calender\Calender.xaml.cs">
       <DependentUpon>Calender.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\CommonComponent\Calender\CalenderItemInfoModel.cs" />
     <Compile Include="Components\CommonComponent\Calender\CalenderHeader.xaml.cs">
       <DependentUpon>CalenderHeader.xaml</DependentUpon>
     </Compile>
@@ -160,6 +161,14 @@
       <DependentUpon>Payment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Payment\PaymentViewModel.cs" />
+    <Compile Include="Components\Statistic\Class\Attendence\Attendence.xaml.cs">
+      <DependentUpon>Attendence.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Class\Attendence\AttendenceViewModel.cs" />
+    <Compile Include="Components\Statistic\Class\Attendence\GeneralClassSwitcher.xaml.cs">
+      <DependentUpon>GeneralClassSwitcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Class\Attendence\GeneralClassSwitcherViewModel.cs" />
     <Compile Include="Components\Statistic\Class\Class.xaml.cs">
       <DependentUpon>Class.xaml</DependentUpon>
     </Compile>
@@ -387,6 +396,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\Statistic\Class\Attendence\Attendence.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Class\Attendence\GeneralClassSwitcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\Statistic\Class\Class.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -590,6 +607,7 @@
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
