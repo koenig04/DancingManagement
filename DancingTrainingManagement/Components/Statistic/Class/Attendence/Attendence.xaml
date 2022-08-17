@@ -4,14 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DancingTrainingManagement.Components.Statistic.Class.Attendence"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="250">
+             d:DesignHeight="300" d:DesignWidth="350">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Width="100" Style="{StaticResource SysConfigureLabelStyle}" Content="出勤率" FontSize="18" 
                                Foreground="{StaticResource ResourceKey=mainColor}"/>
+        <Border Grid.Row="0" Grid.RowSpan="3" Width="340" Height="300" BorderBrush="{StaticResource mainColor}" BorderThickness="2" CornerRadius="5"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <local:GeneralClassSwitcher DataContext="{Binding GeneralClassSwitcher}" Margin="0 0 15 0"/>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding VisClass}">
+                <Label Width="80" Style="{StaticResource SysConfigureLabelStyle}" Content="上课班级" FontSize="15" 
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                <ComboBox Style="{StaticResource ComboBoxStyleBase}" SelectedValue="{Binding SelectedClass}" HorizontalContentAlignment="Left"
+                                  ItemsSource="{Binding ClassCollection}" Width="100" Margin="5 0 0 0" IsEnabled="{Binding IsClassEditable}"/>
+            </StackPanel>
+        </StackPanel>
+        <lvc:PieChart Grid.Row="2" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Hoverable="True" DataTooltip="{x:Null}" Series="{Binding PieColletcion}" InnerRadius="50"/>
+        <Label Grid.Row="2" Width="80" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding AttendenceRatio}" HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center" FontFamily="Microsoft YaHei" FontSize="15" FontWeight="Bold" Foreground="{StaticResource ResourceKey=mainColor}"/>
     </Grid>
 </UserControl>

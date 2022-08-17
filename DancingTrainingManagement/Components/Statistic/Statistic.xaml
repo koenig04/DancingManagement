@@ -31,7 +31,7 @@
             <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding StatisticFunc,Converter={StaticResource ischeckedConverter},
                 ConverterParameter=2}" Command="{Binding ChangeStatisticFunc}" CommandParameter="2" Content="学员统计" VerticalAlignment="Bottom"/>
             <ToggleButton Style="{StaticResource SysConfigureToggleButtonStyle}" IsChecked="{Binding StatisticFunc,Converter={StaticResource ischeckedConverter},
-                ConverterParameter=2}" Command="{Binding ChangeStatisticFunc}" CommandParameter="4" Content="班级统计" VerticalAlignment="Bottom"/>
+                ConverterParameter=4}" Command="{Binding ChangeStatisticFunc}" CommandParameter="4" Content="班级统计" VerticalAlignment="Bottom"/>
         </StackPanel>
         <general:General Grid.Row="1" DataContext="{Binding General}"/>
         <finance:Finance Grid.Row="1" DataContext="{Binding Finance}"/>

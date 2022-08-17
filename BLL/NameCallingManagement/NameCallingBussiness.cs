@@ -70,5 +70,10 @@ namespace BLL.NameCallingManagement
             _dal.Update(model);
             OverdueChangedEvent?.Invoke();
         }
+
+        public List<NameCallingModel> GetListByClass(string classID, DateTime startDate, DateTime endDate, bool isGeneral)
+        {
+            return _dal.GetListByClass(classID, startDate, endDate, isGeneral);
+        }
     }
 }

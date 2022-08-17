@@ -67,6 +67,7 @@
     <Compile Include="PDFExporter\PDFExporterCallingList.cs" />
     <Compile Include="PDFExporter\PDFExporterOverdue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticManagement\ClassStatistic\AttendenceBussiness.cs" />
     <Compile Include="StatisticManagement\ClassStatistic\ClassStatisticBussiness.cs" />
     <Compile Include="StatisticManagement\FinanceStatistic\FinanceStatisticBussiness.cs" />
     <Compile Include="StatisticManagement\FinanceStatistic\FinanceStatisticGroup.cs" />

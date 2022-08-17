@@ -109,7 +109,7 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
                     foreach (var name in classNames)
                     {
                         int classCount = i.Value.Count(c => c.ClassName == name);
-                        content.Add(name + " *" + classCount.ToString());
+                        content.Add(name + " x" + classCount.ToString());
                         totalCount += classCount;
                     }
 

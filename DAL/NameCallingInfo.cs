@@ -242,5 +242,40 @@ namespace DAL
             DbHelperSQL.RunProcedure("NameCallingInfo_Update_LK", parameters, out rowsAffected);
             return true;
         }
+
+        public List<NameCallingModel> GetListByClass(string classID, DateTime startDate, DateTime endDate,bool isGeneral)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@ClassID", SqlDbType.VarChar,50),
+                    new SqlParameter("@StartDate",SqlDbType.Date),
+                    new SqlParameter("@EndDate",SqlDbType.Date),
+                    new SqlParameter("@IsGeneral",SqlDbType.VarChar,50)};
+            parameters[0].Value = classID;
+            parameters[1].Value = startDate;
+            parameters[2].Value = endDate;
+            parameters[3].Value = isGeneral;
+
+            DataSet ds = DbHelperSQL.RunProcedure("NameCalling_GetListByClass_LK", parameters, "ds");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select new NameCallingModel()
+                        {
+                            NameCallingID = d.Field<string>("NameCallingID"),
+                            ClassID = d.Field<string>("ClassID"),
+                            ClassType = d.Field<int>("ClassType"),
+                            TeacherID = d.Field<string>("TeacherID"),
+                            Presence = d.Field<string>("Presence"),
+                            Leave = d.Field<string>("Leave"),
+                            Absence = d.Field<string>("Absence"),
+                            Giving = d.Field<string>("Giving"),
+                            ClassDate = d.Field<DateTime>("ClassDate")
+                        }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

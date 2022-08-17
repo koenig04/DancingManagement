@@ -1,4 +1,5 @@
 ﻿using BLL.StatisticManagement.ClassStatistic;
+using DancingTrainingManagement.Components.Statistic.Class.Attendence;
 using DancingTrainingManagement.Components.Statistic.CommonComponent.StatisticHead;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,15 @@ namespace DancingTrainingManagement.Components.Statistic.Class
             set { selecter_ = value; RaisePropertyChanged("DateSelecter"); }
         }
 
+        private AttendenceViewModel attendence_;
+
+        public AttendenceViewModel Attendence
+        {
+            get { return attendence_; }
+            set { attendence_ = value; RaisePropertyChanged("Attendence"); }
+        }
+
+
 
         ClassStatisticBussiness bussiness_;
 
@@ -27,11 +37,13 @@ namespace DancingTrainingManagement.Components.Statistic.Class
 
             DateSelecter = new DateSelecterViewModel();
             DateSelecter.DateSpanChangedEvent += OnDateChanged;
+
+            Attendence = new AttendenceViewModel(bussiness.Attendence);
         }
 
         private void OnDateChanged(DateTime startDate, DateTime endDate, bool isSortedByMonth)
         {
-            throw new NotImplementedException();
+            Attendence.ChangeDate(startDate, endDate);
         }
     }
 }

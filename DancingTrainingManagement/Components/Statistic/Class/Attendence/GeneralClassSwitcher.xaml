@@ -14,14 +14,14 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <ToggleButton Style="{StaticResource LeftRoundToggelButtonStyle}" IsChecked="{Binding YMDState,Converter={StaticResource IsCheckedConverter},ConverterParameter=1}" 
-                          Command="{Binding ChangeYMDState}" CommandParameter="1" Width="60" Content="总览" x:Name="month">
+            <ToggleButton Style="{StaticResource LeftRoundToggelButtonStyle}" IsChecked="{Binding AttendeceState,Converter={StaticResource IsCheckedConverter},ConverterParameter=1}" 
+                          Command="{Binding ChangeAttendenceState}" CommandParameter="1" Width="60" Content="总览" x:Name="month">
                 <ToggleButton.Foreground>
                     <SolidColorBrush Color="{Binding ElementName=month, Path=IsChecked, Converter={StaticResource ColorConverter}}"/>
                 </ToggleButton.Foreground>
             </ToggleButton>
-            <ToggleButton Style="{StaticResource RightRoundToggelButtonStyle}" IsChecked="{Binding YMDState,Converter={StaticResource IsCheckedConverter},ConverterParameter=0}"  
-                          Command="{Binding ChangeYMDState}" CommandParameter="0" Width="60" Content="班级" x:Name="year">
+            <ToggleButton Style="{StaticResource RightRoundToggelButtonStyle}" IsChecked="{Binding AttendeceState,Converter={StaticResource IsCheckedConverter},ConverterParameter=0}"  
+                          Command="{Binding ChangeAttendenceState}" CommandParameter="0" Width="60" Content="班级" x:Name="year">
                 <ToggleButton.Foreground>
                     <SolidColorBrush Color="{Binding ElementName=year, Path=IsChecked, Converter={StaticResource ColorConverter}}"/>
                 </ToggleButton.Foreground>

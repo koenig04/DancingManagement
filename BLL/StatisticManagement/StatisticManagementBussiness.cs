@@ -33,7 +33,7 @@ namespace BLL.StatisticManagement
             Teacher = new TeachingStatisticBussiness(calling, regulars, blocks);
             Trainee = new TraineeStatisticBussiness(trainees, regulars, new RegularTraineeBussiness(trainee), overdue, calling, paymentDal);
             General = new GeneralAndExportBussiness(trainees.Dal, GeneralDal, blocks, regulars, trainees);
-            ClassStatistic = new ClassStatisticBussiness(regulars);
+            ClassStatistic = new ClassStatisticBussiness(regulars, calling);
         }
     }
 }

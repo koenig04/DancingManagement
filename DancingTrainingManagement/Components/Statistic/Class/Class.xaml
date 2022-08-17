@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DancingTrainingManagement.Components.Statistic.Class"
              xmlns:header ="clr-namespace:DancingTrainingManagement.Components.Statistic.CommonComponent.StatisticHead"
+             xmlns:attendence ="clr-namespace:DancingTrainingManagement.Components.Statistic.Class.Attendence"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
     <Grid>        
@@ -17,7 +18,16 @@
                 <Label Content="出勤率" Style="{StaticResource SysConfigLabel}" Foreground="{StaticResource mainColor}"/>
             </GroupBox.Header>
         </GroupBox>-->
-        <header:DateSelecter Grid.Row="0" Grid.ColumnSpan="2" DataContext="{Binding DateSelecter}"/>
+        <header:DateSelecter Grid.Row="0" Grid.ColumnSpan="2" DataContext="{Binding DateSelecter}" HorizontalAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+            </Grid.ColumnDefinitions>
+            <attendence:Attendence Grid.Row="0" Grid.Column="0" DataContext="{Binding Attendence}"/>
+        </Grid>
         <!--<Grid Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
