@@ -229,10 +229,17 @@
       <DependentUpon>Statistic.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Statistic\StatisticViewModel.cs" />
+    <Compile Include="Components\Statistic\Teacher\CLassCountViewModel.cs" />
+    <Compile Include="Components\Statistic\Teacher\ClassItemViewModel.cs" />
+    <Compile Include="Components\Statistic\Teacher\ClassStatistic.xaml.cs">
+      <DependentUpon>ClassStatistic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Statistic\Teacher\ClassStatisticViewModel.cs" />
     <Compile Include="Components\Statistic\Teacher\Teacher.xaml.cs">
       <DependentUpon>Teacher.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Statistic\Teacher\TeacherViewModel.cs" />
+    <Compile Include="Components\Statistic\Teacher\TeachingClassViewModel.cs" />
     <Compile Include="Components\Statistic\Trainee\PresenceItemViewModel.cs" />
     <Compile Include="Components\Statistic\Trainee\PresenceStatistic.xaml.cs">
       <DependentUpon>PresenceStatistic.xaml</DependentUpon>
@@ -445,6 +452,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\Statistic\Statistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Statistic\Teacher\ClassStatistic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

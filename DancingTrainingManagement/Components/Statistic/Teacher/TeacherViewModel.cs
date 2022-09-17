@@ -44,17 +44,17 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
             }
         }
 
-        private CalenderViewModel _calender;
+        //private CalenderViewModel _calender;
 
-        public CalenderViewModel Calender
-        {
-            get { return _calender; }
-            set
-            {
-                _calender = value;
-                RaisePropertyChanged("Calender");
-            }
-        }
+        //public CalenderViewModel Calender
+        //{
+        //    get { return _calender; }
+        //    set
+        //    {
+        //        _calender = value;
+        //        RaisePropertyChanged("Calender");
+        //    }
+        //}
 
         private string count_;
 
@@ -62,6 +62,14 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
         {
             get { return count_; }
             set { count_ = value; RaisePropertyChanged("TotalClassCount"); }
+        }
+
+        private ClassStatisticViewModel countDetail_;
+
+        public ClassStatisticViewModel ClassCount
+        {
+            get { return countDetail_; }
+            set { countDetail_ = value; RaisePropertyChanged("ClassCount"); }
         }
 
 
@@ -73,6 +81,7 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
         {
             bussiness_ = bussiness;
             bussiness_.IndividualTeacherCountInfoChangedEvent += OnIndividualTeacherCountChanged;
+            bussiness_.IndividualTeacherCountByClassChangedEvent += OnIndividualTeacherCountByClassChanged;
 
             YMDSelecter = new YearMonthSelecterWithArrowViewModel();
             YMDSelecter.YearMonthChangedEvent += (year, month) =>
@@ -87,12 +96,25 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
                   currentTeacher_ = teacher;
                   SearchTeacherInfo();
               };
-            Calender = new CalenderViewModel();
+            ClassCount = new ClassStatisticViewModel();
+            //Calender = new CalenderViewModel();
 
             currentYear_ = DateTime.Now.Year;
             currentMonth_ = DateTime.Now.Month;
             currentTeacher_ = TeacherManagementBussiness.Instance.Teachers[0];
             SearchTeacherInfo();
+        }
+
+        private void OnIndividualTeacherCountByClassChanged(List<TeachingCountByClass> info)
+        {
+            ClassCount.UpdateClassList(info);
+            int totalCount = 0;
+            foreach(var i in info)
+            {
+                totalCount += (from c in i.Info
+                               select c.Value).Sum();
+            }
+            TotalClassCount = totalCount.ToString();
         }
 
         private void OnIndividualTeacherCountChanged(TeachingCountGroup info)
@@ -116,7 +138,7 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
                     infos.Add(new CalenderItemInfoModel(i.Key.Day.ToString(), content));
                 }
             }
-            Calender.UpdateInfo(infos);
+            //Calender.UpdateInfo(infos);
             TotalClassCount = totalCount.ToString();
         }
 
@@ -124,12 +146,13 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
         {
             if (currentMonth_ != 0 && currentYear_ != 0 && currentTeacher_ != null)
             {
-                Calender.UpdateDateInfo(currentYear_, currentMonth_);
+                //Calender.UpdateDateInfo(currentYear_, currentMonth_);
 
                 DateTime startDate = Convert.ToDateTime(currentYear_.ToString() + "-" + currentMonth_.ToString() + "-1");
                 DateTime endDate = startDate.AddMonths(1);
 
-                bussiness_.SearchTeachingCountForIndividualTeacher(startDate, endDate, currentTeacher_.TeacherID);
+                //bussiness_.SearchTeachingCountForIndividualTeacher(startDate, endDate, currentTeacher_.TeacherID);
+                bussiness_.SearchTeachingCountByClassAndTeacher(startDate, endDate, currentTeacher_.TeacherID);
             }
         }
     }

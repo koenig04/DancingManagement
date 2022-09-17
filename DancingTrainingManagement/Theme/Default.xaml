@@ -12,6 +12,7 @@
     <SolidColorBrush x:Key="lightMainColor">#6BA7E2</SolidColorBrush>
     <SolidColorBrush x:Key="darkMainBackColor">#C4C4C4</SolidColorBrush>
     <SolidColorBrush x:Key="secondaryMainColor">#8165A0</SolidColorBrush>
+    <SolidColorBrush x:Key="darkerBackground">#D4D4D4</SolidColorBrush>
 
     <converter:VisibilityConverter x:Key="visconverter"/>
 

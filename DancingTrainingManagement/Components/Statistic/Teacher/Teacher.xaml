@@ -28,12 +28,13 @@
             <teacher:TeacherSelecterWithArrow  DataContext="{Binding TeacherSelecter}"/>
         </StackPanel> 
         
-        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
             <Label Style="{StaticResource LabelStyleBaseChs}" Foreground="{StaticResource mainColor}" Content="共" Width="30" FontSize="20"/>
             <Label Style="{StaticResource SysConfigureLabelStyle}" Foreground="{StaticResource secondaryMainColor}" 
                    Width="60" Content="{Binding TotalClassCount}" FontSize="20"/>
             <Label Style="{StaticResource LabelStyleBaseChs}" Foreground="{StaticResource mainColor}" Content="节" Width="30" FontSize="20"/>
         </StackPanel>
-        <calender:Calender Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Calender}"/>
+        <!--<calender:Calender Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding Calender}"/>-->
+        <local:ClassStatistic Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding ClassCount}" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>
