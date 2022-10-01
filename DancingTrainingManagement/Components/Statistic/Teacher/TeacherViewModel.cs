@@ -144,6 +144,9 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
 
         private void SearchTeacherInfo()
         {
+            TotalClassCount = "0";
+            ClassCount.Clear();
+
             if (currentMonth_ != 0 && currentYear_ != 0 && currentTeacher_ != null)
             {
                 //Calender.UpdateDateInfo(currentYear_, currentMonth_);

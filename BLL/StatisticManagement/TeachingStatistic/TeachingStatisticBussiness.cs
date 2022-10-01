@@ -19,6 +19,8 @@ namespace BLL.StatisticManagement.TeachingStatistic
         public event ShowDetails ShowDetailsEvent;
         public delegate void IndividualTeacherCountInfoChanged(TeachingCountGroup info);
         public event IndividualTeacherCountInfoChanged IndividualTeacherCountInfoChangedEvent;
+        public delegate void IndividualTeacherCountByClassChanged(List<TeachingCountByClass> info);
+        public event IndividualTeacherCountByClassChanged IndividualTeacherCountByClassChangedEvent;
 
         private NameCallingBussiness _calling;
         private RegularClassManagement _regularClass;
@@ -76,6 +78,22 @@ namespace BLL.StatisticManagement.TeachingStatistic
                 startDate,
                 endDate,
                 _regularClass));
+        }
+
+        public void SearchTeachingCountByClassAndTeacher(DateTime startDate, DateTime endDate, string id)
+        {
+            var generalInfo = _calling.GetClassInfoForTeacher(id, startDate, endDate);
+            if (generalInfo != null)
+            {
+                var classInfo = (from i in generalInfo
+                                 select i.ClassID).Distinct().ToList();
+                List<TeachingCountByClass> info = new List<TeachingCountByClass>();
+                foreach (var i in classInfo)
+                {
+                    info.Add(new TeachingCountByClass(generalInfo, i, _regularClass));
+                }
+                IndividualTeacherCountByClassChangedEvent?.Invoke(info);
+            }
         }
     }
 }

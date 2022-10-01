@@ -55,7 +55,7 @@ namespace BLL.StatisticManagement.TeachingStatistic
             TeacherName = TeacherManagementBussiness.Instance.Teachers.Where(t => t.TeacherID == teacherID).First().TeacherName;
             List<DateTime> spans = new List<DateTime>();
             int dayCount = (int)(endDate - startDate).TotalDays;
-            for (int i=0;i<dayCount;i++)
+            for (int i = 0; i < dayCount; i++)
             {
                 spans.Add(startDate.AddDays(i));
             }

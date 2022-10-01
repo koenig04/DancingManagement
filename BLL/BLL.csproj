@@ -73,6 +73,7 @@
     <Compile Include="StatisticManagement\FinanceStatistic\FinanceStatisticGroup.cs" />
     <Compile Include="StatisticManagement\GeneralAndExport\GeneralAndExportBussiness.cs" />
     <Compile Include="StatisticManagement\StatisticManagementBussiness.cs" />
+    <Compile Include="StatisticManagement\TeachingStatistic\TeachingCountByClass.cs" />
     <Compile Include="StatisticManagement\TeachingStatistic\TeachingCountGroup.cs" />
     <Compile Include="StatisticManagement\TeachingStatistic\TeachingStatisticBussiness.cs" />
     <Compile Include="StatisticManagement\TraineeStatistic\PresenceBussiness.cs" />

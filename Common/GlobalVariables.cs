@@ -37,6 +37,7 @@ namespace Common
         public static Color SecondaryColor = (Color)ColorConverter.ConvertFromString("#8165A0");
         public static Color AssistBackColor = (Color)ColorConverter.ConvertFromString("#F5EE9E");
         public static Color YellowColor = (Color)ColorConverter.ConvertFromString("#E4CC37");
+        public static Color DarkBackColor = (Color)ColorConverter.ConvertFromString("#D4D4D4");
 
         public static Dictionary<string, ClassType> ClassTypeDic = new Dictionary<string, ClassType>()
         {

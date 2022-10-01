@@ -61,6 +61,12 @@ namespace DancingTrainingManagement.Components.Statistic.Teacher
             }
         }
 
+        public void Clear()
+        {
+            ItemCollection.Clear();
+            Classes.Clear();
+        }
+
         private void OnClassSelected(string id)
         {
             foreach (var c in Classes)
