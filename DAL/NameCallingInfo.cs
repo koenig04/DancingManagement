@@ -1,4 +1,5 @@
-﻿using DBUtility;
+﻿using Common;
+using DBUtility;
 using Model;
 using Model.DancingClass;
 using System;
@@ -153,7 +154,7 @@ namespace DAL
                     new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
                     new SqlParameter("@TermDuration",SqlDbType.Int)};
             parameters[0].Value = traineeID;
-            parameters[1].Value = 20;
+            parameters[1].Value = Configuration.Instance.Configurations.CountPerTerm;
 
             DataSet ds = DbHelperSQL.RunProcedure("NameCallingInfo_GetPreviousTermPresence_LK", parameters, "ds");
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

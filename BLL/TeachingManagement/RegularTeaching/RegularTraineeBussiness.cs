@@ -31,7 +31,7 @@ namespace BLL.TeachingManagement.RegularTeaching
         public TraineeOperationBussiness TraineeOperation { get; private set; }
 
         private TraineeInfo _dal;
-        private List<TraineeModel> _trainees;
+        private List<TraineeModel> _trainees=new List<TraineeModel>();
         private string _currentClassID;
         public RegularTraineeBussiness(TraineeInfo traineeDAL)
         {
@@ -139,6 +139,10 @@ namespace BLL.TeachingManagement.RegularTeaching
                 else
                 {
                     _dal.AddTraineeForRegular(trainee.RegularClassID, trainee.TraineeID);
+                }
+                if (_trainees == null)
+                {
+                    _trainees = new List<TraineeModel>();
                 }
                 _trainees.Add(trainee);
                 OverdueChangedEvent?.Invoke();

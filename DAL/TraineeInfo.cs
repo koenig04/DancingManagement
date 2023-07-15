@@ -28,6 +28,7 @@ namespace DAL
             parameters[3].Value = model.InitialRemainRegularCount;
             parameters[4].Direction = ParameterDirection.Output;
 
+            model.RemainRegularCount = model.InitialRemainRegularCount;
             DbHelperSQL.RunProcedure("TraineeInfo_ADD_LK", parameters, out rowsAffected);
 
             traineeID = parameters[4].Value.ToString();
