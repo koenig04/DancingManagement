@@ -77,6 +77,10 @@
     <Compile Include="Components\CommonComponent\Calender\CalenderItem.cs" />
     <Compile Include="Components\CommonComponent\Calender\CalenderViewModel.cs" />
     <Compile Include="Components\CommonComponent\Calender\ItemContent.cs" />
+    <Compile Include="Components\CommonComponent\CheckBox\CheckBox.xaml.cs">
+      <DependentUpon>CheckBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CommonComponent\CheckBox\CheckBoxViewModel.cs" />
     <Compile Include="Components\CommonComponent\ClassSelecter\ClassSelecter.xaml.cs">
       <DependentUpon>ClassSelecter.xaml</DependentUpon>
     </Compile>
@@ -289,6 +293,10 @@
       <DependentUpon>Others.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\TeachingManagement\Others\OthersViewModel.cs" />
+    <Compile Include="Components\TeachingManagement\RegularTeaching\RegularClassGivingOperation.xaml.cs">
+      <DependentUpon>RegularClassGivingOperation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TeachingManagement\RegularTeaching\RegularClassGivingOperationViewModel.cs" />
     <Compile Include="Components\TeachingManagement\RegularTeaching\RegularClassOperation.xaml.cs">
       <DependentUpon>RegularClassOperation.xaml</DependentUpon>
     </Compile>
@@ -332,6 +340,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\CommonComponent\Calender\CalenderHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CommonComponent\CheckBox\CheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -496,6 +508,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\TeachingManagement\Others\Others.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TeachingManagement\RegularTeaching\RegularClassGivingOperation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

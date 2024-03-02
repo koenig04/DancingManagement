@@ -19,7 +19,7 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
     /// </summary>
     class RegularClassOperationViewModel : ClassOperationViewModel
     {
-        
+
 
         private DelegateCommand _confirm;
 
@@ -30,7 +30,7 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
                 _confirm = _confirm ?? new DelegateCommand(new Action<object>(
                     o =>
                     {
-                        if(!CheckValidity())
+                        if (!CheckValidity())
                         {
                             return;
                         }
@@ -50,7 +50,29 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
             }
         }
 
+        private DelegateCommand _addClassGiving;
 
+        public DelegateCommand AddClassGiving
+        {
+            get
+            {
+                _addClassGiving = _addClassGiving ?? new DelegateCommand(new Action<object>(
+                    o =>
+                    {
+                        AddGivingEvent?.Invoke(_model.ClassID);
+                    }));
+
+                return _addClassGiving;
+            }
+            set
+            {
+                _addClassGiving = value;
+                RaisePropertyChanged("AddClassGiving");
+            }
+        }
+
+        public delegate void AddGiving(string classID);
+        public event AddGiving AddGivingEvent;
 
         private RegularClassOperationBussiness _bussiness;
         private OperationType _operation;
@@ -59,9 +81,9 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
         {
             _bussiness = bussiness;
             _bussiness.OperationEnableEnvet += Enable;
-            
+
             ClassTypeCollection = new ObservableCollection<string>();
-            RegularClassType.Instance.RegularClassTypeCollection.ForEach(c => ClassTypeCollection.Add(c.Name));            
+            RegularClassType.Instance.RegularClassTypeCollection.ForEach(c => ClassTypeCollection.Add(c.Name));
         }
 
         private void Enable(OperationType operation, RegularClassModel model)

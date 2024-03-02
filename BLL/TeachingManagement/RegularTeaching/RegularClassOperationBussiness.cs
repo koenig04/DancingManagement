@@ -1,6 +1,8 @@
 ﻿using BLL.ClassManagement;
 using Common;
+using DAL;
 using Model;
+using Model.DancingClass;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace BLL.TeachingManagement.RegularTeaching
 
 
         private RegularClassManagement _bussiness;
+        private ClassGivingInfo _givingDAL = new ClassGivingInfo();
 
         public RegularClassOperationBussiness(RegularClassManagement regularClass)
         {
@@ -29,6 +32,12 @@ namespace BLL.TeachingManagement.RegularTeaching
         public void OperateRegularClass(OperationType operation, RegularClassModel model)
         {
             _bussiness.OperateClassInfo(operation, model);
+        }
+
+        public void AddNewGiving(ClassGivingInfoModel model)
+        {
+            string id;
+            _givingDAL.Add(model, out id);
         }
     }
 }

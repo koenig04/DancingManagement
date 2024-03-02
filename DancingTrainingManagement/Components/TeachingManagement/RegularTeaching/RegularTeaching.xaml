@@ -18,5 +18,6 @@
         <traineeList:TraineeList Grid.Column="1" DataContext="{Binding TraineeList}"/>
         <local:RegularClassOperation Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding ClassOperation}"/>
         <traineeOperation:TraineeOperation Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding TraineeOperation}"/>
+        <local:RegularClassGivingOperation Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding ClassGivingOperation}"/>
     </Grid>
 </UserControl>

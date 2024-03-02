@@ -68,6 +68,14 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
             }
         }
 
+        private RegularClassGivingOperationViewModel giving_;
+
+        public RegularClassGivingOperationViewModel ClassGivingOperation
+        {
+            get { return giving_; }
+            set { giving_ = value; }
+        }
+
 
         private RegularTeachingBussiness _bussiness;
         public RegularTeachingViewModel(RegularTeachingBussiness bussiness)
@@ -77,6 +85,9 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
             ClassOperation = new RegularClassOperationViewModel(bussiness.RegularClassOperation);
             TraineeList = new RegularTraineeListViewModel(bussiness.RegularTrainee);
             TraineeOperation = new RegularTraineeOperationViewModel(bussiness.TraineeManagement, bussiness.RegularTrainee.TraineeOperation, bussiness.RegularClasses);
+            ClassGivingOperation = new RegularClassGivingOperationViewModel(bussiness.RegularClassOperation);
+
+            ClassOperation.AddGivingEvent += (string id) => ClassGivingOperation.AddNewGiving(id);
         }
     }
 }

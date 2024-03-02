@@ -46,6 +46,7 @@
     <Compile Include="Competition\CompetitionPaymentModel.cs" />
     <Compile Include="Competition\CompetitionTraineesInfoModel.cs" />
     <Compile Include="DancingClass\BlockClassModel.cs" />
+    <Compile Include="DancingClass\ClassGivingInfoModel.cs" />
     <Compile Include="DancingClass\ClassInfoForTeacherModel.cs" />
     <Compile Include="DancingClass\ClassModel.cs" />
     <Compile Include="ItemInfoModel.cs" />
