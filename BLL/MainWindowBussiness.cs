@@ -50,6 +50,7 @@ namespace BLL
             Teaching.Block.BlockTrainee.OverdueChangedEvent += Overdue.Refresh;
             Teaching.Regular.RegularTrainee.OverdueChangedEvent += Overdue.Refresh;
             Teaching.Regular.RegularClasses.OverdueChangedEvent += Overdue.Refresh;
+            Teaching.Regular.OverdueChangedEvent += Overdue.Refresh;
 
             Teaching.TraineeCountChanged += (sender, args) => Statistic.General.RefreshTraineeCount();
 

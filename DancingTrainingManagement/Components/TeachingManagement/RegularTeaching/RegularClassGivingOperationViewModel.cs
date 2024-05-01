@@ -1,4 +1,5 @@
 ﻿using BLL.TeachingManagement.RegularTeaching;
+using Common;
 using DancingTrainingManagement.Components.CommonComponent.CheckBox;
 using DancingTrainingManagement.UICore;
 using Model.DancingClass;
@@ -98,15 +99,34 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
                     if (CheckValidation())
                     {
                         ErrVis = System.Windows.Visibility.Collapsed;
-                        ClassGivingInfoModel model = new ClassGivingInfoModel();
-                        model.ClassID = currentClassID_;
-                        model.StartDate = StartDate;
-                        if (EndDateEnable)
-                            model.EndDate = EndDate;
-                        model.GivingInterval = int.Parse(GivingInterval);
-                        model.GivingCount = int.Parse(GivingCount);
-                        model.EndDataEnable = EndDateEnable;
-                        _bussiness.AddNewGiving(model);
+                        if (opType_ == OperationType.Add)
+                        {
+                            ClassGivingInfoModel model = new ClassGivingInfoModel();
+                            model.ClassID = currentClassID_;
+                            model.StartDate = StartDate;
+                            if (EndDateEnable)
+                                model.EndDate = EndDate;
+                            model.GivingInterval = int.Parse(GivingInterval);
+                            model.GivingCount = int.Parse(GivingCount);
+                            model.EndDateEnable = EndDateEnable;
+                            _bussiness.AddNewGiving(model);
+                        }
+                        else if (opType_ == OperationType.Update)
+                        {
+                            ClassGivingInfoModel model = new ClassGivingInfoModel();
+                            model.ClassGivingID = givingID_;
+                            model.ClassID = currentClassID_;
+                            model.StartDate = StartDate;
+                            if (EndDateEnable)
+                                model.EndDate = EndDate;
+                            model.GivingInterval = int.Parse(GivingInterval);
+                            model.GivingCount = int.Parse(GivingCount);
+                            model.EndDateEnable = EndDateEnable;
+                            _bussiness.UpdateGiving(model);
+                        }
+
+                        GivingOpFinishedEvent?.Invoke();
+                        Vis = System.Windows.Visibility.Hidden;
                     }
                     else
                     {
@@ -125,13 +145,18 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
             set { errVis_ = value; RaisePropertyChanged("ErrVis"); }
         }
 
+        public delegate void GivingOpFinished();
+        public event GivingOpFinished GivingOpFinishedEvent;
 
         private RegularClassOperationBussiness _bussiness;
         private string currentClassID_;
+        private OperationType opType_;
+        private string givingID_;
 
         public RegularClassGivingOperationViewModel(RegularClassOperationBussiness bussiness) : base()
         {
             _bussiness = bussiness;
+            EndDataChb = new CheckBoxViewModel();
             EndDataChb.CheckboxStatusChangedEvent += (enable) => EndDateEnable = enable;
             Vis = System.Windows.Visibility.Hidden;
         }
@@ -145,8 +170,23 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
             Title = "新增送课";
             ErrVis = System.Windows.Visibility.Collapsed;
             StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
             Vis = System.Windows.Visibility.Visible;
+            opType_ = OperationType.Add;
 
+        }
+
+        public void UpdateGiving(ClassGivingInfoModel model)
+        {
+            givingID_ = model.ClassGivingID;
+            StartDate = model.StartDate;
+            EndDate = model.EndDateEnable ? model.EndDate : DateTime.Now;
+            GivingCount = model.GivingCount.ToString();
+            GivingInterval = model.GivingInterval.ToString();
+            EndDateEnable = model.EndDateEnable;
+            Vis = System.Windows.Visibility.Visible;
+            opType_ = OperationType.Update;
+            ErrVis = System.Windows.Visibility.Collapsed;
         }
 
         private bool CheckValidation()

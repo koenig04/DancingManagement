@@ -203,7 +203,7 @@ namespace DAL
             {
                 return null;
             }
-        }   
+        }
 
         public void Del(string callingID)
         {
@@ -244,7 +244,7 @@ namespace DAL
             return true;
         }
 
-        public List<NameCallingModel> GetListByClass(string classID, DateTime startDate, DateTime endDate,bool isGeneral)
+        public List<NameCallingModel> GetListByClass(string classID, DateTime startDate, DateTime endDate, bool isGeneral)
         {
             SqlParameter[] parameters = {
                     new SqlParameter("@ClassID", SqlDbType.VarChar,50),
@@ -271,6 +271,226 @@ namespace DAL
                             Absence = d.Field<string>("Absence"),
                             Giving = d.Field<string>("Giving"),
                             ClassDate = d.Field<DateTime>("ClassDate")
+                        }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ClassGivingInfoModel> GetGivingList(string classID)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@ClassID", SqlDbType.VarChar,50)};
+            parameters[0].Value = classID;
+
+            DataSet ds = DbHelperSQL.RunProcedure("ClassGivingInfo_GetList_LK", parameters, "ds");
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select new ClassGivingInfoModel()
+                        {
+                            ClassGivingID = d.Field<string>("ClassGivingID"),
+                            ClassID = d.Field<string>("ClassID"),
+                            StartDate = d.Field<DateTime>("StartDate"),
+                            EndDate = d.Field<DateTime>("EndDate"),
+                            GivingInterval = d.Field<int>("GivingInterval"),
+                            GivingCount = d.Field<int>("GivingCount"),
+                            EndDateEnable = d.Field<bool>("EndDateEnable")
+                        }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<DateTime> GetListAsGivingInfo(string traineeID, ClassGivingInfoModel givingInfo)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@ClassID", SqlDbType.VarChar,50),
+                    new SqlParameter("@StartDate", SqlDbType.Date),
+                    new SqlParameter("@EndDate", SqlDbType.Date),
+                    new SqlParameter("@EndDateEnable",SqlDbType.Bit)};
+            parameters[0].Value = traineeID;
+            parameters[1].Value = givingInfo.ClassID;
+            parameters[2].Value = givingInfo.StartDate;
+            parameters[3].Value = givingInfo.EndDate;
+            parameters[4].Value = givingInfo.EndDateEnable;
+
+            DataSet ds = DbHelperSQL.RunProcedure("NameCallingInfo_GetList_ByTraineeAndClass_LK", parameters, "ds");
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select d.Field<DateTime>("ClassDate")).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public TraineeModel GetTraineeModel(string traineeID)
+        {
+            List<string> res = new List<string>();
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50)
+                                        };
+            parameters[0].Value = traineeID;
+
+            DataSet ds = DbHelperSQL.RunProcedure("TraineeInfo_GetModel_LK", parameters, "ds");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return new TraineeModel()
+                {
+                    TraineeID = ds.Tables[0].Rows[0]["TraineeID"].ToString(),
+                    TraineeName = ds.Tables[0].Rows[0]["TraineeName"].ToString(),
+                    RegularClassID = ds.Tables[0].Rows[0]["RegularClassID"].ToString(),
+                    RemainRegularCount = int.Parse(ds.Tables[0].Rows[0]["RemainRegularCount"].ToString())
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void UpdateRemainCount(string traineeID, int remainCount)
+        {
+            int rowsAffected;
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@RemainCount", SqlDbType.Int)
+                                        };
+            parameters[0].Value = traineeID;
+            parameters[1].Value = remainCount;
+            DbHelperSQL.RunProcedure("TraineeInfo_Update_RemainRegular_LK", parameters, out rowsAffected);
+        }
+
+        public void ReduceRemaiCountAndOverdue(string traineeID, int remainCount, string classID, DateTime overdueDate)
+        {
+            int rowsAffected;
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@RemainCount", SqlDbType.Int),
+                    new SqlParameter("@ClassID", SqlDbType.VarChar,50),
+                    new SqlParameter("@OverdueDate", SqlDbType.Date)
+                                        };
+            parameters[0].Value = traineeID;
+            parameters[1].Value = remainCount;
+            parameters[2].Value = classID;
+            parameters[3].Value = overdueDate;
+            DbHelperSQL.RunProcedure("TraineeInfo_Reduce_RemainRegular_ChangeOverdue_LK", parameters, out rowsAffected);
+        }
+
+        public void IncreaseRemainCountAndOverdue(string traineeID, int remainCount)
+        {
+            int rowsAffected;
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@RemainCount", SqlDbType.Int)
+                                        };
+            parameters[0].Value = traineeID;
+            parameters[1].Value = remainCount;
+            DbHelperSQL.RunProcedure("TraineeInfo_Increase_RemainRegular_ChangeOverdue_LK", parameters, out rowsAffected);
+        }
+
+        public bool AddGivingDetail(ClassGivingDetailModel model, out string givingID)
+        {
+            int rowsAffected;
+            SqlParameter[] parameters = {
+                    new SqlParameter("@ClassGivingID", SqlDbType.VarChar,50),
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@GivingDate", SqlDbType.Date),
+                    new SqlParameter("@ID",SqlDbType.VarChar,50)
+                                        };
+            parameters[0].Value = model.ClassGivingID;
+            parameters[1].Value = model.TraineeID;
+            parameters[2].Value = model.GivingDate;
+            parameters[3].Direction = ParameterDirection.Output;
+
+            DbHelperSQL.RunProcedure("ClassGivingDetail_ADD_LK", parameters, out rowsAffected);
+
+            givingID = parameters[3].Value.ToString();
+            return true;
+        }
+
+        public List<ClassGivingDetailModel> GetGivingDetail(string traineeID)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50)};
+            parameters[0].Value = traineeID;
+
+            DataSet ds = DbHelperSQL.RunProcedure("ClassGivingDetail_GetListByTrainee_LK", parameters, "ds");
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select new ClassGivingDetailModel()
+                        {
+                            ClassGivingID = d.Field<string>("ClassGivingID"),
+                            GivingDetailID = d.Field<string>("GivingDetailID"),
+                            TraineeID = d.Field<string>("TraineeID"),
+                            GivingDate = d.Field<DateTime>("GivingDate")
+                        }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<NameCallingModel> GetListByPresentCount(string traineeID, int presentCount)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@PresentCount", SqlDbType.Int)};
+            parameters[0].Value = traineeID;
+            parameters[1].Value = presentCount;
+
+            DataSet ds = DbHelperSQL.RunProcedure("NameCallingInfo_GetListByPresentCount_LK", parameters, "ds");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select new NameCallingModel()
+                        {
+                            ClassID = d.Field<string>("ClassID"),
+                            Presence = d.Field<string>("Presence"),
+                            Leave = d.Field<string>("Leave"),
+                            Absence = d.Field<string>("Absence"),
+                            Giving = d.Field<string>("Giving"),
+                            ClassDate = d.Field<DateTime>("ClassDate")
+                        }).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ClassGivingDetailModel> GetGivingDetailByTraineeAndCount(string traineeID, int givingCount)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@GivingCount", SqlDbType.Int)};
+            parameters[0].Value = traineeID;
+            parameters[1].Value = givingCount;
+
+            DataSet ds = DbHelperSQL.RunProcedure("ClassGivingDetail_GetListByTraineeAndCount_LK", parameters, "ds");
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return (from d in ds.Tables[0].AsEnumerable()
+                        select new ClassGivingDetailModel()
+                        {
+                            ClassGivingID = d.Field<string>("ClassGivingID"),
+                            GivingDetailID = d.Field<string>("GivingDetailID"),
+                            TraineeID = d.Field<string>("TraineeID"),
+                            GivingDate = d.Field<DateTime>("GivingDate")
                         }).ToList();
             }
             else

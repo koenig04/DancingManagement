@@ -3,6 +3,7 @@ using DancingTrainingManagement.Components.TeachingManagement.Common.ClassList;
 using DancingTrainingManagement.Components.TeachingManagement.Common.TraineeList;
 using DancingTrainingManagement.Components.TeachingManagement.Common.TraineeOperation;
 using DancingTrainingManagement.UICore;
+using Model.DancingClass;
 
 namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeaching
 {
@@ -88,6 +89,8 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
             ClassGivingOperation = new RegularClassGivingOperationViewModel(bussiness.RegularClassOperation);
 
             ClassOperation.AddGivingEvent += (string id) => ClassGivingOperation.AddNewGiving(id);
+            ClassOperation.UpdateGivingEvent += (ClassGivingInfoModel giving) => ClassGivingOperation.UpdateGiving(giving);
+            ClassGivingOperation.GivingOpFinishedEvent += () => ClassOperation.RefreshGiving();
         }
     }
 }

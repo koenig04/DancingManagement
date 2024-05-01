@@ -15,11 +15,14 @@ namespace BLL.TeachingManagement.RegularTeaching
         public RegularTraineeBussiness RegularTrainee { get; private set; }
         public TraineeManagementBussiness TraineeManagement { get; private set; }
         public event EventHandler TraineeCountChanged;
+        public delegate void OverdueChanged();
+        public event OverdueChanged OverdueChangedEvent;
 
         public RegularTeachingBussiness(RegularClassManagement regularClass, TraineeManagementBussiness traineeManagement)
         {
             RegularClasses = regularClass;
-            RegularClassOperation = new RegularClassOperationBussiness(regularClass);
+            RegularClassOperation = new RegularClassOperationBussiness(regularClass,traineeManagement.Dal);
+            RegularClassOperation.OverdueChangedEvent += () => OverdueChangedEvent?.Invoke();
             RegularClasses.ChangeRegularClassEvent += (operation, model) =>
             {
                 if (operation == Common.OperationType.Select)

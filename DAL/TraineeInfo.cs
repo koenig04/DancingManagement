@@ -292,5 +292,70 @@ namespace DAL
             DbHelperSQL.RunProcedure("TraineeInfo_GetTraineeCount_LK", parameters, out rowsAffected);
             return int.Parse(parameters[0].Value.ToString());
         }
+
+        public void UpdateRemainCount(string traineeID, int remainCount)
+        {
+            int rowsAffected;
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@RemainCount", SqlDbType.Int)
+                                        };
+            parameters[0].Value = traineeID;
+            parameters[1].Value = remainCount;
+            DbHelperSQL.RunProcedure("TraineeInfo_Update_RemainRegular_LK", parameters, out rowsAffected);
+        }
+
+        public void ReduceRemaiCountAndOverdue(string traineeID, int remainCount, string classID, DateTime overdueDate)
+        {
+            int rowsAffected;
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@RemainCount", SqlDbType.Int),
+                    new SqlParameter("@ClassID", SqlDbType.VarChar,50),
+                    new SqlParameter("@OverdueDate", SqlDbType.Date)
+                                        };
+            parameters[0].Value = traineeID;
+            parameters[1].Value = remainCount;
+            parameters[2].Value = classID;
+            parameters[3].Value = overdueDate;
+            DbHelperSQL.RunProcedure("TraineeInfo_Reduce_RemainRegular_ChangeOverdue_LK", parameters, out rowsAffected);
+        }
+
+        public void IncreaseRemainCountAndOverdue(string traineeID, int remainCount)
+        {
+            int rowsAffected;
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50),
+                    new SqlParameter("@RemainCount", SqlDbType.Int)
+                                        };
+            parameters[0].Value = traineeID;
+            parameters[1].Value = remainCount;
+            DbHelperSQL.RunProcedure("TraineeInfo_Increase_RemainRegular_ChangeOverdue_LK", parameters, out rowsAffected);
+        }
+
+        public TraineeModel GetModel(string traineeID)
+        {
+            List<string> res = new List<string>();
+            SqlParameter[] parameters = {
+                    new SqlParameter("@TraineeID", SqlDbType.VarChar,50)
+                                        };
+            parameters[0].Value = traineeID;
+
+            DataSet ds = DbHelperSQL.RunProcedure("TraineeInfo_GetModel_LK", parameters, "ds");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return new TraineeModel()
+                {
+                    TraineeID = ds.Tables[0].Rows[0]["TraineeID"].ToString(),
+                    TraineeName = ds.Tables[0].Rows[0]["TraineeName"].ToString(),
+                    RegularClassID = ds.Tables[0].Rows[0]["RegularClassID"].ToString(),
+                    RemainRegularCount = int.Parse(ds.Tables[0].Rows[0]["RemainRegularCount"].ToString())
+                };
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

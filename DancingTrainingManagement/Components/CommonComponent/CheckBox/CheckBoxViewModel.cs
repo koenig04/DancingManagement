@@ -38,7 +38,8 @@ namespace DancingTrainingManagement.Components.CommonComponent.CheckBox
 
         public DelegateCommand Check
         {
-            get {
+            get
+            {
                 check_ = check_ ?? new DelegateCommand(new Action<object>(
                     o =>
                     {
@@ -46,7 +47,8 @@ namespace DancingTrainingManagement.Components.CommonComponent.CheckBox
                         Bkg = isChecked_ ? GlobalVariables.MainColor : GlobalVariables.MainBackColor;
                         CheckboxStatusChangedEvent?.Invoke(isChecked_);
                     }));
-                        return check_; }
+                return check_;
+            }
             set { check_ = value; RaisePropertyChanged("Check"); }
         }
 
@@ -65,7 +67,8 @@ namespace DancingTrainingManagement.Components.CommonComponent.CheckBox
 
         public void resetStatus()
         {
-            Check.Execute(null);
+            if (isChecked_)
+                Check.Execute(null);
         }
     }
 }

@@ -7,35 +7,97 @@
              xmlns:local="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.RegularTeaching"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1040" Visibility="{Binding Vis}">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type local:GivingClassViewModel}">
+            <Border Grid.Row = "0" Grid.RowSpan="2"  Width="310" Height="50" Margin="5 5 0 5" 
+                                                CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource mainColor}"
+                                                HorizontalAlignment="Left" Background="{StaticResource mainColor}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Width="100" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding StartDate}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Right"/>
+                            <Label Grid.Column="1" Width="25" Style="{StaticResource SysConfigureLabelStyle}" Content="至" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Center"/>
+                            <Label Grid.Column="2" Width="100" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding EndDate}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Left"/>
+                        </Grid>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Label Width="25" Style="{StaticResource SysConfigureLabelStyle}" Content="每" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Left"/>
+                            <Label Width="30" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding GivingInterval}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Left"/>
+                            <Label Width="70" Style="{StaticResource SysConfigureLabelStyle}" Content="节课，送" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Left"/>
+                            <Label Width="30" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding GivingCount}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Left"/>
+                            <Label Width="25" Style="{StaticResource SysConfigureLabelStyle}" Content="课" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainBackground}" HorizontalContentAlignment="Left"/>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1">
+                        <Image Width="20" Source="../../../img/setup.png">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding Modify}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <Rectangle Width="2" Height="25" Fill="White" Margin="3 0 0 0"/>
+                        <Image Width="25" Source="../../../img/delete.png">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:InvokeCommandAction Command="{Binding Del}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                    </StackPanel>
+                    
+                    <!--<Label Width="30" Grid.Column="1" Style="{StaticResource LabelStyleBaseChs}" Height="30">
+                        
+                    </Label>-->
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="220"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="100"/>
             <RowDefinition/>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" Width="1040" Height="700" Opacity="0.8"
                Background="{StaticResource ResourceKey=mainBackground}"/>
-        <Border Grid.Column="1" Grid.Row="1" Height="360" Width="740" BorderBrush="White" CornerRadius="10" BorderThickness="2" Background="{StaticResource assistBackground}">
+        <Border Grid.Column="1" Grid.Row="1" Height="400" Width="600" BorderBrush="White" CornerRadius="10" BorderThickness="2" Background="{StaticResource assistBackground}">
             <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource assistBackground}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition/>
                     <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" CornerRadius="10 10 0 00" Height="50" Width="738" Background="{StaticResource mainColor}">
+                <Border Grid.Row="0" CornerRadius="10 10 0 00" Height="50" Width="600" Background="{StaticResource mainColor}">
                     <Label Content="{Binding Title}" Style="{StaticResource SysConfigureLabelStyle}" Margin="60 0 0 0"
                        HorizontalAlignment="Left" HorizontalContentAlignment="Left"/>
                 </Border>
                 <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="400"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Vertical" Grid.Column="0" Margin="40 0 0 0" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <Label Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="等级" FontSize="15" 
@@ -61,20 +123,37 @@
                             <Label Width="140" Height="30" Style="{StaticResource SysConfigureLabelStyle}" FontSize="10" FontWeight="Normal" 
                          Foreground="{StaticResource outcomeColor}" Content="请输入正确的学费" Visibility="{Binding ErrVis}"/>
                         </StackPanel>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 10 0 10">
+                            <Label Grid.Row="0" Style="{StaticResource SysConfigureLabelStyle}" Content="送课" FontSize="15" Height="35" Width="50"
+                               Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                            <Grid Height="40" Width="30" >
+                                <Rectangle StrokeThickness="2" StrokeDashArray="2 2" Height="30" Width="30" RadiusX="2" RadiusY="2" 
+                                                       Stroke="{StaticResource mainColor}" Margin="0 2 0 2"/>
+                                <Label Style="{StaticResource LabelStyleBaseChs}" Height="30" Width="30" Content="+"  Margin="0 0 0 10"
+                                                   FontWeight="ExtraBold" FontSize="20" Foreground="{StaticResource mainColor}" IsEnabled="{Binding GivingEnable}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding AddClassGiving}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Label>
+                            </Grid>
+                            <local:GivingClass DataContext="{Binding Giving}" Margin="45 0 0 0"/>
+                        </StackPanel>
                     </StackPanel>
-                    <Grid Grid.Column="1">
+                    <!--<Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Label Grid.Row="0" Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="送课设置" FontSize="15" Height="35"
+                            <Label Grid.Row="0" Width="120" Style="{StaticResource SysConfigureLabelStyle}" Content="送课" FontSize="15" Height="35"
                                Foreground="{StaticResource ResourceKey=mainColor}" VerticalAlignment="Bottom"/>
-                            <Grid Height="55" Width="50">
-                                <Rectangle StrokeThickness="2" StrokeDashArray="2 2" Height="20" Width="20" RadiusX="2" RadiusY="2" 
+                            <Grid Height="40" Width="30" VerticalAlignment="Bottom">
+                                <Rectangle StrokeThickness="2" StrokeDashArray="2 2" Height="30" Width="30" RadiusX="2" RadiusY="2" 
                                                        Stroke="{StaticResource mainColor}" Margin="0 2 0 2"/>
-                                <Label Style="{StaticResource LabelStyleBaseChs}" Height="50" Width="300" Content="+" 
-                                                   FontWeight="ExtraBold" FontSize="24" Foreground="{StaticResource mainColor}">
+                                <Label Style="{StaticResource LabelStyleBaseChs}" Height="30" Width="30" Content="+"  Margin="0 0 0 10"
+                                                   FontWeight="ExtraBold" FontSize="20" Foreground="{StaticResource mainColor}" IsEnabled="{Binding GivingEnable}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseLeftButtonDown">
                                             <i:InvokeCommandAction Command="{Binding AddClassGiving}"/>
@@ -87,13 +166,13 @@
                             CornerRadius="5">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <ScrollViewer.Content>
-                                    <StackPanel>
-                                        <ItemsControl ItemsSource="{Binding Classes}" HorizontalAlignment="Center"/>
-                                    </StackPanel>
+                                    --><!--<StackPanel>--><!--
+                                    <ItemsControl ItemsSource="{Binding GivingClasses}" HorizontalAlignment="Center" Background="Transparent"/>
+                                    --><!--</StackPanel>--><!--
                                 </ScrollViewer.Content>
                             </ScrollViewer>
                         </Border>
-                    </Grid>
+                    </Grid>-->
                 </Grid>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
                     <Button Grid.Column="0" Style="{StaticResource ButtonStyleBaseChs}" Height="40" Width="120"

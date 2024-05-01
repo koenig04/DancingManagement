@@ -86,6 +86,14 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
         {
             ItemCollection.Clear();
 
+            int presenceTotalCount = (from d in info.Details
+                                      where d.State == CallingState.Presence
+                                      select d).Count();
+            int givingTotalCount = (from d in info.Details
+                                    where d.State == CallingState.Giving
+                                    select d).Count();
+            bool isOverdue = presenceTotalCount - givingTotalCount > Configuration.Instance.Configurations.CountPerTerm;
+
             int presenceCount = 0;
             if (info.Details != null)
             {
@@ -93,7 +101,7 @@ namespace DancingTrainingManagement.Components.Statistic.Trainee
                 {
                     if (item.State == CallingState.Presence) presenceCount++;
                     ItemCollection.Add(new PresenceItemViewModel(item));
-                    if(item.State == CallingState.Presence && presenceCount > Configuration.Instance.Configurations.CountPerTerm)
+                    if (item.State == CallingState.Presence && isOverdue && presenceCount > (Configuration.Instance.Configurations.CountPerTerm + givingTotalCount))
                     {
                         ItemCollection.Last().ChangeToOverdue();
                     }

@@ -4,6 +4,7 @@ using Common;
 using DancingTrainingManagement.Components.TeachingManagement.Common;
 using DancingTrainingManagement.UICore;
 using Model;
+using Model.DancingClass;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,8 +20,6 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
     /// </summary>
     class RegularClassOperationViewModel : ClassOperationViewModel
     {
-
-
         private DelegateCommand _confirm;
 
         public DelegateCommand Confirm
@@ -59,7 +58,8 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
                 _addClassGiving = _addClassGiving ?? new DelegateCommand(new Action<object>(
                     o =>
                     {
-                        AddGivingEvent?.Invoke(_model.ClassID);
+                        if (Giving.Vis != Visibility.Visible)
+                            AddGivingEvent?.Invoke(_model.ClassID);
                     }));
 
                 return _addClassGiving;
@@ -71,8 +71,28 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
             }
         }
 
+        private GivingClassViewModel giving_;
+
+        public GivingClassViewModel Giving
+        {
+            get { return giving_; }
+            set { giving_ = value; RaisePropertyChanged("Giving"); }
+        }
+
+
+        private bool givingEnable_;
+
+        public bool GivingEnable
+        {
+            get { return givingEnable_; }
+            set { givingEnable_ = value; RaisePropertyChanged("GivingEnable"); }
+        }
+
+
         public delegate void AddGiving(string classID);
         public event AddGiving AddGivingEvent;
+        public delegate void UpdateGiving(ClassGivingInfoModel model);
+        public event UpdateGiving UpdateGivingEvent;
 
         private RegularClassOperationBussiness _bussiness;
         private OperationType _operation;
@@ -84,6 +104,14 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
 
             ClassTypeCollection = new ObservableCollection<string>();
             RegularClassType.Instance.RegularClassTypeCollection.ForEach(c => ClassTypeCollection.Add(c.Name));
+
+
+            Giving = new GivingClassViewModel();
+            Giving.GivingModifyEvent += (ClassGivingInfoModel giving) => UpdateGivingEvent?.Invoke(giving);
+            Giving.GivingDelEvent += (ClassGivingInfoModel info) =>
+            {
+                _bussiness.DelGiving(info);
+            };
         }
 
         private void Enable(OperationType operation, RegularClassModel model)
@@ -107,9 +135,32 @@ namespace DancingTrainingManagement.Components.TeachingManagement.RegularTeachin
                 }
                 _operation = operation;
                 _model = model ?? new RegularClassModel();
+
+                Giving.Vis = Visibility.Hidden;
+                if (operation == OperationType.Update)
+                {
+                    List<ClassGivingInfoModel> classes = _bussiness.GetGiving(model.ClassID);
+                    if (classes != null)
+                    {
+                        Giving.Active(classes[0]);
+                    }
+                    GivingEnable = true;
+                }
+                else
+                {
+                    GivingEnable = false;
+                }
                 HideErr();
                 Vis = Visibility.Visible;
             }
+        }
+
+        public void RefreshGiving()
+        {
+            Giving.Vis = Visibility.Hidden;
+            List<ClassGivingInfoModel> classes = _bussiness.GetGiving(_model.ClassID);
+            if (classes != null)
+                Giving.Active(classes[0]);
         }
 
         private bool CheckValidity()

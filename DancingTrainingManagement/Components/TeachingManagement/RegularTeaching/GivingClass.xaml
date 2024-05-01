@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="DancingTrainingManagement.Components.TeachingManagement.RegularTeaching.GivingClass"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:local="clr-namespace:DancingTrainingManagement.Components.TeachingManagement.RegularTeaching"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="310" Visibility="{Binding Vis}">
+    <Border Width="280" Height="60"  Background="{StaticResource darkerBackground}"
+                                                CornerRadius="5" BorderThickness="1" BorderBrush="{StaticResource mainColor}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Width="100" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding StartDate}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                    <Label Grid.Column="1" Width="25" Style="{StaticResource SysConfigureLabelStyle}" Content="至" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Center"/>
+                    <Label Grid.Column="2" Width="100" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding EndDate}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Width="25" Style="{StaticResource SysConfigureLabelStyle}" Content="每" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                    <Label Width="30" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding GivingInterval}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Center"/>
+                    <Label Width="70" Style="{StaticResource SysConfigureLabelStyle}" Content="节课，送" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                    <Label Width="30" Style="{StaticResource SysConfigureLabelStyle}" Content="{Binding GivingCount}" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Center"/>
+                    <Label Width="50" Style="{StaticResource SysConfigureLabelStyle}" Content="节课" FontSize="14" Height="30"
+                                                           Foreground="{StaticResource ResourceKey=mainColor}" HorizontalContentAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center">
+                <!--<Image Width="25" Source="../../../img/setup.png">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding Modify}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <Rectangle Width="2" Height="25" Fill="White" Margin="8 0 5 0"/>-->
+                <Image Width="30" Source="../../../img/delete.png">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding Del}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
